@@ -10,3 +10,10 @@ db.sqlite3-journal
 .vscode/
 .idea/
 
+# Frontend dependencies and builds
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+*.local
+
+
