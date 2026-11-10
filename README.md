@@ -17,7 +17,6 @@ This system provides a clean, modular, and role-secured healthcare backend handl
 8. [Automatic Billing & Validation Rules](#automatic-billing--validation-rules)
 9. [Running Automated Tests](#running-automated-tests)
 10. [Postman Import & Testing Guide](#postman-import--testing-guide)
-11. [Senior Developer Production Audit](#senior-developer-production-audit)
 
 ---
 
@@ -315,16 +314,6 @@ python manage.py test
 5. All subsequent requests automatically inherit and send the `Bearer {{access_token}}` header.
 
 ---
-
-## 🔍 Senior Developer Production Audit
-
-As a production-grade system, here is the architectural assessment:
-
-### Security Strengths:
-1. **Custom User Model from Day One:** Overriding `AbstractUser` before initial migration avoids painful future database refactoring.
-2. **Role Scoping at ViewSet Queryset Level:** Rather than relying solely on UI filtering, queries are scoped in `get_queryset()` on the backend, making IDOR (Insecure Direct Object Reference) attacks impossible.
-3. **No Raw Password Storage:** Django PBKDF2 hashing with salt secures all passwords.
-4. **Execution Time Telemetry:** `RequestExecutionTimeMiddleware` instruments performance monitoring out of the box.
 
 ### Production Scaling Recommendations:
 1. **Environment Variables:** Migrate `SECRET_KEY`, `DEBUG`, and database settings to `.env` using `python-decouple` before deploying to staging/production.
