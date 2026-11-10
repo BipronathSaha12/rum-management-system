@@ -2,7 +2,7 @@
 
 Welcome to the **RUM Hospital Web Application & Digital Patient Portal**, built with **React 18**, **Vite**, **Tailwind CSS**, and **Lucide React**.
 
-This frontend is designed as a **clinical-grade, mobile-responsive, light-themed hospital portal** modeled after top-tier tertiary corporate hospitals (such as **Asgar Ali Hospital**).
+This frontend is designed as a **clinical-grade, mobile-responsive, light-themed hospital portal** modeled after top-tier tertiary corporate hospitals.
 
 ---
 
