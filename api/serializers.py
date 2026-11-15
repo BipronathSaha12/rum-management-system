@@ -6,7 +6,15 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from rest_framework import serializers
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
-from .models import Appointment, Bill, Doctor
+from .models import (
+    Appointment,
+    Bill,
+    Department,
+    Doctor,
+    DoctorSlot,
+    PatientProfile,
+    PaymentTransaction,
+)
 
 User = get_user_model()
 
@@ -43,6 +51,9 @@ class RegisterSerializer(serializers.ModelSerializer):
             role="Patient",
             password=password,
         )
+        # Automatically generate default PatientProfile with unique HCN
+        hcn = f"RUM-2026-{user.id:05d}"
+        PatientProfile.objects.create(user=user, hcn_number=hcn)
         return user
 
 
@@ -144,10 +155,21 @@ class UserProfileSerializer(serializers.ModelSerializer):
         return value.lower()
 
 
+class DepartmentSerializer(serializers.ModelSerializer):
+    """Serializer for medical departments."""
+
+    class Meta:
+        model = Department
+        fields = ("id", "name", "code", "description", "icon_name", "is_active")
+
+
 class DoctorSerializer(serializers.ModelSerializer):
     """Serializer for Doctors in RUM Hospital."""
 
     user_email = serializers.EmailField(source="user.email", read_only=True)
+    department_name = serializers.CharField(
+        source="department_ref.name", read_only=True
+    )
 
     class Meta:
         model = Doctor
@@ -157,7 +179,14 @@ class DoctorSerializer(serializers.ModelSerializer):
             "user_email",
             "name",
             "department",
+            "department_ref",
+            "department_name",
             "specialization",
+            "designation",
+            "qualifications",
+            "experience_years",
+            "room_number",
+            "visiting_hours",
             "visiting_fee",
         )
 
@@ -165,6 +194,30 @@ class DoctorSerializer(serializers.ModelSerializer):
         if value < 0:
             raise serializers.ValidationError("Visiting fee cannot be negative.")
         return value
+
+
+class DoctorSlotSerializer(serializers.ModelSerializer):
+    """Serializer for discrete doctor appointment slots."""
+
+    doctor_name = serializers.CharField(source="doctor.name", read_only=True)
+    doctor_department = serializers.CharField(
+        source="doctor.department", read_only=True
+    )
+
+    class Meta:
+        model = DoctorSlot
+        fields = (
+            "id",
+            "doctor",
+            "doctor_name",
+            "doctor_department",
+            "date",
+            "start_time",
+            "end_time",
+            "is_booked",
+            "booked_by",
+        )
+        read_only_fields = ("id", "is_booked", "booked_by")
 
 
 class AppointmentSerializer(serializers.ModelSerializer):
@@ -188,9 +241,11 @@ class AppointmentSerializer(serializers.ModelSerializer):
             "doctor",
             "doctor_name",
             "doctor_department",
+            "slot",
             "appointment_date",
             "appointment_time",
             "status",
+            "symptoms",
         )
         read_only_fields = ("id",)
 
@@ -200,9 +255,6 @@ class AppointmentSerializer(serializers.ModelSerializer):
                 "Appointment date cannot be in the past."
             )
         return value
-
-    def validate(self, attrs):
-        return super().validate(attrs)
 
 
 class BillSerializer(serializers.ModelSerializer):
@@ -255,3 +307,60 @@ class BillSerializer(serializers.ModelSerializer):
             )
 
         return attrs
+
+
+class PatientProfileSerializer(serializers.ModelSerializer):
+    """Serializer for Patient Permanent Healthcare Profile."""
+
+    user_email = serializers.EmailField(source="user.email", read_only=True)
+    user_full_name = serializers.CharField(
+        source="user.full_name", read_only=True
+    )
+
+    class Meta:
+        model = PatientProfile
+        fields = (
+            "id",
+            "user",
+            "user_email",
+            "user_full_name",
+            "hcn_number",
+            "blood_group",
+            "date_of_birth",
+            "gender",
+            "emergency_contact_name",
+            "emergency_contact_phone",
+            "medical_allergies",
+        )
+        read_only_fields = ("id", "hcn_number")
+
+
+class PaymentTransactionSerializer(serializers.ModelSerializer):
+    """Serializer for payment ledger transactions."""
+
+    patient_name = serializers.CharField(source="patient.full_name", read_only=True)
+
+    class Meta:
+        model = PaymentTransaction
+        fields = (
+            "id",
+            "transaction_id",
+            "bill",
+            "patient",
+            "patient_name",
+            "gateway",
+            "amount",
+            "currency",
+            "status",
+            "gateway_val_id",
+            "created_at",
+            "updated_at",
+        )
+        read_only_fields = (
+            "id",
+            "transaction_id",
+            "status",
+            "gateway_val_id",
+            "created_at",
+            "updated_at",
+        )
