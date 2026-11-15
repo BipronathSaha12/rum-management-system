@@ -77,13 +77,16 @@ TEMPLATES = [
 WSGI_APPLICATION = "config.wsgi.application"
 
 # Database Configuration with PostgreSQL High-Concurrency Support and SQLite dev fallback
-DATABASES = {
-    "default": config(
-        "DATABASE_URL",
-        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
-        cast=dj_database_url.parse,
-    )
-}
+db_url = config("DATABASE_URL", default="")
+if db_url and not db_url.startswith("sqlite"):
+    DATABASES = {"default": dj_database_url.parse(db_url)}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Apply connection optimizations when running PostgreSQL
 if "postgresql" in DATABASES["default"].get("ENGINE", ""):
