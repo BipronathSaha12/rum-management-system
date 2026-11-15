@@ -133,6 +133,94 @@ def run_postman_simulation():
     )
     print(f"HTTP Status: {res.status_code} OK")
     print(json.dumps(res.json(), indent=4))
+    # -------------------------------------------------------------
+    # 5. ENTERPRISE HEALTHCARE: SLOTS, LOCKING, & PAYMENT LEDGER
+    # -------------------------------------------------------------
+    header("TEST 10: PATIENT CHECKS PERMANENT HCN & HEALTH PROFILE (GET /api/patient-profile/)")
+    res = requests.get(
+        f"{BASE_URL}/patient-profile/",
+        headers={"Authorization": f"Bearer {patient_token}"},
+    )
+    print(f"HTTP Status: {res.status_code} OK")
+    print(json.dumps(res.json(), indent=4))
+
+    header("TEST 11: QUERY REAL-TIME AVAILABLE DOCTOR SLOTS (GET /api/slots/?is_booked=false)")
+    res = requests.get(
+        f"{BASE_URL}/slots/?is_booked=false",
+        headers={"Authorization": f"Bearer {patient_token}"},
+    )
+    print(f"HTTP Status: {res.status_code} OK")
+    slots_data = res.json()
+    available_slots = slots_data.get("results", slots_data)
+    print(f"Total Available Consultation Slots: {len(available_slots)}")
+    first_slot = available_slots[0] if available_slots else None
+
+    if first_slot:
+        target_slot_id = first_slot["id"]
+        header(f"TEST 12: CONCURRENCY-SAFE SLOT RESERVATION FOR SLOT #{target_slot_id} (POST /api/slots/reserve/)")
+        res = requests.post(
+            f"{BASE_URL}/slots/reserve/",
+            headers={"Authorization": f"Bearer {patient_token}"},
+            json={
+                "slot_id": target_slot_id,
+                "symptoms": "High blood pressure and shortness of breath during exertion"
+            },
+        )
+        print(f"HTTP Status: {res.status_code} CREATED")
+        print(json.dumps(res.json(), indent=4))
+
+        header(f"TEST 13: RACE CONDITION DOUBLE-BOOKING SIMULATION (POST /api/slots/reserve/)")
+        conflict_res = requests.post(
+            f"{BASE_URL}/slots/reserve/",
+            headers={"Authorization": f"Bearer {patient_token}"},
+            json={
+                "slot_id": target_slot_id,
+                "symptoms": "Duplicate concurrent attempt"
+            },
+        )
+        print(f"HTTP Status: {conflict_res.status_code} CONFLICT (Expected 409)")
+        print(json.dumps(conflict_res.json(), indent=4))
+
+    # Find the bill to initiate payment
+    if bills_data.get("results"):
+        target_bill = bills_data["results"][0]
+        header(f"TEST 14: INITIATE PAYMENT TRANSACTION FOR BILL #{target_bill['id']} (POST /api/payments/initiate/)")
+        res = requests.post(
+            f"{BASE_URL}/payments/initiate/",
+            headers={"Authorization": f"Bearer {patient_token}"},
+            json={
+                "bill_id": target_bill["id"],
+                "gateway": "SSLCOMMERZ"
+            },
+        )
+        print(f"HTTP Status: {res.status_code} OK")
+        payment_info = res.json()
+        print(json.dumps(payment_info, indent=4))
+        txn_id = payment_info["transaction_id"]
+
+        header(f"TEST 15: SERVER-TO-SERVER IPN WEBHOOK RECONCILIATION (POST /api/payments/ipn/)")
+        ipn_payload = {
+            "tran_id": txn_id,
+            "status": "VALID",
+            "val_id": "VAL-SSLCOM-TEST-9988",
+            "amount": str(target_bill["total_amount"]),
+            "currency": "BDT"
+        }
+        ipn_res = requests.post(
+            f"{BASE_URL}/payments/ipn/",
+            json=ipn_payload
+        )
+        print(f"HTTP Status: {ipn_res.status_code} OK")
+        print(json.dumps(ipn_res.json(), indent=4))
+
+    header("TEST 16: PATIENT REVIEWS AUDIT PAYMENT LEDGER (GET /api/payments/)")
+    res = requests.get(
+        f"{BASE_URL}/payments/",
+        headers={"Authorization": f"Bearer {patient_token}"},
+    )
+    print(f"HTTP Status: {res.status_code} OK")
+    print(json.dumps(res.json(), indent=4))
+
     print("\n" + "=" * 75)
     print("  ALL DOCTOR & PATIENT POSTMAN TEST WORKFLOWS COMPLETED SUCCESSFULLY!")
     print("=" * 75)

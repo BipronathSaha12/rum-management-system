@@ -802,6 +802,201 @@
           }
         }
       ]
+    },
+    {
+      "name": "7. Clinical Departments & Doctor Slots",
+      "item": [
+        {
+          "name": "7.1 List Clinical Departments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/departments/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "departments",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "7.2 List Available Doctor Slots",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/slots/?is_booked=false",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "slots",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "is_booked",
+                  "value": "false"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "7.3 Concurrency-Safe Slot Reservation (select_for_update)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slot_id\": 1,\n  \"symptoms\": \"Chest tightness and palpitations\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/slots/reserve/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "slots",
+                "reserve",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "7.4 Patient Permanent Health Profile (HCN)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/patient-profile/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "patient-profile",
+                ""
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "8. Payment Gateway & Ledger",
+      "item": [
+        {
+          "name": "8.1 Initiate Payment Session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bill_id\": 1,\n  \"gateway\": \"SSLCOMMERZ\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments/initiate/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "initiate",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "8.2 Payment IPN Webhook Callback (Server-to-Server)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tran_id\": \"RUM-TXN-ABC1234567\",\n  \"val_id\": \"VAL-SSL-998877\",\n  \"status\": \"VALID\",\n  \"amount\": \"1500.00\",\n  \"currency\": \"BDT\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/payments/ipn/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                "ipn",
+                ""
+              ]
+            }
+          }
+        },
+        {
+          "name": "8.3 Patient Payment Audit Ledger",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{access_token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{base_url}}/api/payments/",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "api",
+                "payments",
+                ""
+              ]
+            }
+          }
+        }
+      ]
     }
   ]
 }
