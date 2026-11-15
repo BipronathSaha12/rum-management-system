@@ -1,4 +1,4 @@
-# 🏥 RUM Hospital Management System (Enterprise Full-Stack Architecture)
+# 🏥 RUM Hospital Management System
 
 [![RUM Hospital CI](https://github.com/BipronathSaha12/rum-management-system/actions/workflows/ci.yml/badge.svg)](https://github.com/BipronathSaha12/rum-management-system/actions/workflows/ci.yml)
 [![Django](https://img.shields.io/badge/Django-6.1-green.svg)](https://www.djangoproject.com/)
