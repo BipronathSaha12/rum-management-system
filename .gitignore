@@ -1,19 +1,51 @@
+# ========================================================
+# RUM Hospital Management System - Root .gitignore
+# ========================================================
+
+# --- Python & Django Backend ---
+backend/venv/
+backend/.venv/
 venv/
 .venv/
-__pycache__/
+**/__pycache__/
 *.py[cod]
 *$py.class
+*.so
+*.egg
+*.egg-info/
+backend/db.sqlite3
+backend/db.sqlite3-journal
 db.sqlite3
 db.sqlite3-journal
+backend/.env
+backend/.env.local
 .env
+.env.*
+!.env.example
+!backend/.env.example
 *.log
+local_settings.py
+
+# --- Node.js & React Frontend ---
+frontend/node_modules/
+node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.vite/
+frontend/*.local
+*.tsbuildinfo
+.npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- IDEs & Operating Systems ---
 .vscode/
 .idea/
-
-# Frontend dependencies and builds
-frontend/node_modules/
-frontend/dist/
-frontend/.vite/
-*.local
-
-
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+Desktop.ini
