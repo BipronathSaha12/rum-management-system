@@ -9,11 +9,12 @@ import {
   HeartPulse,
   PhoneCall,
   ChevronRight,
-  ShieldAlert
+  ShieldAlert,
+  Stethoscope
 } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
 
-export default function Navbar({ onOpenPortal, onOpenBooking }) {
+export default function Navbar({ onOpenPortal, onOpenDoctorPortal, onOpenBooking }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -76,10 +77,19 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2.5">
+            <button
+              onClick={onOpenDoctorPortal}
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2.5 rounded-lg border border-teal-200 text-teal-800 bg-teal-50/60 hover:bg-teal-100/80 hover:border-teal-300 transition-all shadow-xs"
+              title="Doctor & Physician Login"
+            >
+              <Stethoscope className="w-4 h-4 text-teal-600" />
+              <span>Doctor Portal</span>
+            </button>
+
             <button
               onClick={onOpenPortal}
-              className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all shadow-subtle"
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all shadow-xs"
             >
               <User className="w-4 h-4 text-brand-600" />
               <span>Patient Portal</span>
@@ -184,13 +194,24 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
         </div>
 
         {/* Drawer Footer Actions */}
-        <div className="pt-6 border-t border-slate-100 space-y-3">
+        <div className="pt-6 border-t border-slate-100 space-y-2.5">
+          <button
+            onClick={() => {
+              setMobileMenuOpen(false);
+              onOpenDoctorPortal();
+            }}
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-teal-200 bg-teal-50/70 text-sm font-semibold text-teal-800 hover:bg-teal-100 transition-colors"
+          >
+            <Stethoscope className="w-4 h-4 text-teal-600" />
+            <span>Doctor Portal Login</span>
+          </button>
+
           <button
             onClick={() => {
               setMobileMenuOpen(false);
               onOpenPortal();
             }}
-            className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-slate-300 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl border border-slate-300 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
           >
             <User className="w-4 h-4 text-brand-600" />
             <span>Patient Portal Login</span>

@@ -95,6 +95,62 @@ class HospitalApiService {
     }
   }
 
+  async getDoctorAppointments() {
+    try {
+      const res = await fetch(`${BASE_URL}/appointments/`, {
+        headers: this.getHeaders(true),
+      });
+      if (!res.ok) throw new Error("Could not fetch doctor appointments");
+      const data = await res.json();
+      return data.results || data;
+    } catch (err) {
+      console.warn("Could not fetch doctor appointments:", err.message);
+      return [];
+    }
+  }
+
+  async completeAppointment(appointmentId) {
+    const res = await fetch(`${BASE_URL}/appointments/${appointmentId}/`, {
+      method: "PATCH",
+      headers: this.getHeaders(true),
+      body: JSON.stringify({ status: "Completed" }),
+    });
+    if (!res.ok) {
+      const error = await res.json();
+      throw new Error(error.detail || "Could not complete appointment");
+    }
+    return await res.json();
+  }
+
+  async getDoctorSlots(doctorId) {
+    try {
+      const url = doctorId ? `${BASE_URL}/slots/?doctor=${doctorId}` : `${BASE_URL}/slots/`;
+      const res = await fetch(url, {
+        headers: this.getHeaders(true),
+      });
+      if (!res.ok) throw new Error("Could not fetch doctor slots");
+      const data = await res.json();
+      return data.results || data;
+    } catch (err) {
+      console.warn("Could not fetch doctor slots:", err.message);
+      return [];
+    }
+  }
+
+  async getBills() {
+    try {
+      const res = await fetch(`${BASE_URL}/bills/`, {
+        headers: this.getHeaders(true),
+      });
+      if (!res.ok) throw new Error("Could not fetch bills");
+      const data = await res.json();
+      return data.results || data;
+    } catch (err) {
+      console.warn("Could not fetch bills:", err.message);
+      return [];
+    }
+  }
+
   logout() {
     this.token = null;
     this.user = null;
