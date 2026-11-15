@@ -4,7 +4,15 @@ from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
 
-from .models import Appointment, Bill, Doctor
+from .models import (
+    Appointment,
+    Bill,
+    Doctor,
+    Department,
+    DoctorSlot,
+    PatientProfile,
+    PaymentTransaction,
+)
 
 User = get_user_model()
 
@@ -342,3 +350,130 @@ class HospitalAPITests(APITestCase):
         self.assertIn("total_appointments", res.data)
         self.assertIn("pending_appointments", res.data)
         self.assertIn("completed_appointments", res.data)
+
+    # -------------------------------------------------------------
+    # SECTION 6: ADVANCED HEALTHCARE ENTERPRISE TESTS (SLOTS & PAYMENTS)
+    # -------------------------------------------------------------
+    def test_department_listing(self):
+        dept = Department.objects.create(name="Cardiology Special", code="CARD_SPEC", icon_name="Heart")
+        url = reverse("department-list")
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        results = res.data["results"] if "results" in res.data else res.data
+        self.assertGreaterEqual(len(results), 1)
+
+    def test_doctor_slot_query_and_filtering(self):
+        slot_date = date.today() + timedelta(days=2)
+        slot = DoctorSlot.objects.create(
+            doctor=self.doctor,
+            date=slot_date,
+            start_time="09:00:00",
+            end_time="09:30:00",
+            is_booked=False,
+        )
+        url = reverse("slot-list") + f"?doctor={self.doctor.id}&date={slot_date}&is_booked=false"
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        slots = res.data["results"] if "results" in res.data else res.data
+        self.assertEqual(len(slots), 1)
+        self.assertEqual(slots[0]["id"], slot.id)
+
+    def test_slot_reservation_with_pessimistic_lock_and_conflict_handling(self):
+        slot_date = date.today() + timedelta(days=2)
+        slot = DoctorSlot.objects.create(
+            doctor=self.doctor,
+            date=slot_date,
+            start_time="10:00:00",
+            end_time="10:30:00",
+            is_booked=False,
+        )
+        url = reverse("reserve-slot")
+        self.client.force_authenticate(user=self.patient)
+
+        # 1. First reservation succeeds
+        payload = {
+            "slot_id": slot.id,
+            "symptoms": "Severe chest tightness and shortness of breath",
+        }
+        res1 = self.client.post(url, payload)
+        self.assertEqual(res1.status_code, status.HTTP_201_CREATED)
+        self.assertIn("appointment_id", res1.data)
+
+        # Verify slot is marked booked
+        slot.refresh_from_db()
+        self.assertTrue(slot.is_booked)
+        self.assertEqual(slot.booked_by, self.patient)
+
+        # 2. Second concurrent reservation must fail with HTTP 409 Conflict
+        other_patient = User.objects.create_user(
+            email="concurrent@example.com",
+            password="Password123!",
+            full_name="Concurrent Patient",
+            phone_number="01777777777",
+            role="Patient",
+        )
+        self.client.force_authenticate(user=other_patient)
+        res2 = self.client.post(url, payload)
+        self.assertEqual(res2.status_code, status.HTTP_409_CONFLICT)
+        self.assertIn("detail", res2.data)
+
+    def test_payment_initiation_and_ipn_webhook_idempotency(self):
+        future_date = (date.today() + timedelta(days=3)).isoformat()
+        apt = Appointment.objects.create(
+            patient=self.patient,
+            doctor=self.doctor,
+            appointment_date=future_date,
+            appointment_time="16:00:00",
+            status="Pending",
+        )
+        bill = Bill.objects.create(
+            patient=self.patient,
+            doctor=self.doctor,
+            appointment=apt,
+            consultation_fee=1500.00,
+            discount=0.00,
+        )
+
+        # 1. Initiate Payment
+        self.client.force_authenticate(user=self.patient)
+        initiate_url = reverse("initiate-payment")
+        init_res = self.client.post(
+            initiate_url, {"bill_id": bill.id, "gateway": "SSLCOMMERZ"}
+        )
+        self.assertEqual(init_res.status_code, status.HTTP_200_OK)
+        txn_id = init_res.data["transaction_id"]
+        self.assertTrue(txn_id.startswith("RUM-TXN-"))
+        self.assertIn("payment_url", init_res.data)
+
+        # 2. Server-to-Server Webhook callback
+        ipn_url = reverse("payment-ipn")
+        webhook_payload = {
+            "tran_id": txn_id,
+            "status": "VALID",
+            "val_id": "VAL-SSL-998877",
+            "bank_tran_id": "BANK-123456",
+            "amount": "1500.00",
+            "currency": "BDT",
+        }
+        ipn_res = self.client.post(ipn_url, webhook_payload)
+        self.assertEqual(ipn_res.status_code, status.HTTP_200_OK)
+
+        # Verify transaction state and appointment status
+        txn = PaymentTransaction.objects.get(transaction_id=txn_id)
+        apt.refresh_from_db()
+        self.assertEqual(txn.status, "SUCCESS")
+        self.assertEqual(txn.gateway_val_id, "VAL-SSL-998877")
+        self.assertEqual(apt.status, "Confirmed")
+
+        # 3. Test IPN Idempotency: repeating identical webhook doesn't duplicate
+        dup_ipn_res = self.client.post(ipn_url, webhook_payload)
+        self.assertEqual(dup_ipn_res.status_code, status.HTTP_200_OK)
+        self.assertIn("already processed", dup_ipn_res.data["detail"].lower())
+
+    def test_patient_profile_retrieval(self):
+        self.client.force_authenticate(user=self.patient)
+        url = reverse("patient-profile")
+        res = self.client.get(url)
+        self.assertEqual(res.status_code, status.HTTP_200_OK)
+        self.assertIn("hcn_number", res.data)
+        self.assertTrue(res.data["hcn_number"].startswith("RUM-2026-"))
