@@ -15,7 +15,6 @@ import MobileBottomNav from './components/MobileBottomNav';
 import DoctorModal from './components/DoctorModal';
 import AppointmentBookingModal from './components/AppointmentBookingModal';
 import PatientPortalModal from './components/PatientPortalModal';
-import DoctorPortalModal from './components/DoctorPortalModal';
 import ToastNotification from './components/ToastNotification';
 
 export default function App() {
@@ -24,7 +23,6 @@ export default function App() {
   const [bookingDoctor, setBookingDoctor] = useState(null);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [isPortalModalOpen, setIsPortalModalOpen] = useState(false);
-  const [isDoctorPortalOpen, setIsDoctorPortalOpen] = useState(true);
 
   // Filter communication
   const [selectedDeptForFilter, setSelectedDeptForFilter] = useState("all");
@@ -60,7 +58,6 @@ export default function App() {
       {/* 2. Main Sticky Navigation with Mobile Drawer */}
       <Navbar
         onOpenPortal={() => setIsPortalModalOpen(true)}
-        onOpenDoctorPortal={() => setIsDoctorPortalOpen(true)}
         onOpenBooking={() => handleOpenBooking(null)}
       />
 
@@ -139,13 +136,6 @@ export default function App() {
       {isPortalModalOpen && (
         <PatientPortalModal
           onClose={() => setIsPortalModalOpen(false)}
-          onNotification={(msg) => setToastMessage(msg)}
-        />
-      )}
-
-      {isDoctorPortalOpen && (
-        <DoctorPortalModal
-          onClose={() => setIsDoctorPortalOpen(false)}
           onNotification={(msg) => setToastMessage(msg)}
         />
       )}

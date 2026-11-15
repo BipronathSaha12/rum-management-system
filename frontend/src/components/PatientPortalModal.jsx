@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   User,
@@ -15,7 +15,18 @@ import { api } from '../services/api';
 
 export default function PatientPortalModal({ onClose, onNotification }) {
   const [isLogin, setIsLogin] = useState(true);
-  const [currentUser, setCurrentUser] = useState(api.user);
+
+  // STRICT GUARD: Only patients are allowed to maintain a session in the Patient Portal
+  const initialPatientUser = (api.user && api.user.role === 'Patient') ? api.user : null;
+  const [currentUser, setCurrentUser] = useState(initialPatientUser);
+
+  // If a non-patient user was cached in localStorage, clear it immediately
+  useEffect(() => {
+    if (api.user && api.user.role !== 'Patient') {
+      api.logout();
+      setCurrentUser(null);
+    }
+  }, []);
 
   // Login form state
   const [email, setEmail] = useState("patient.john@gmail.com");
@@ -37,6 +48,17 @@ export default function PatientPortalModal({ onClose, onNotification }) {
 
     try {
       const data = await api.login(email, password);
+
+      // STRICT PATIENT ROLE VALIDATION:
+      // Physicians (Doctors) and Administrators CANNOT authenticate in the Patient Portal.
+      if (data.user?.role !== "Patient") {
+        api.logout();
+        setCurrentUser(null);
+        throw new Error(
+          "Access Denied: This portal is strictly for patients. Physician (Doctor) accounts cannot log in to the Patient Portal."
+        );
+      }
+
       setCurrentUser(data.user);
       if (onNotification) onNotification(`Welcome back, ${data.user.full_name}!`);
     } catch (err) {
@@ -61,6 +83,13 @@ export default function PatientPortalModal({ onClose, onNotification }) {
 
       // Auto login
       const data = await api.login(regEmail, regPassword);
+
+      if (data.user?.role !== "Patient") {
+        api.logout();
+        setCurrentUser(null);
+        throw new Error("Access Denied: Only patients can access the Patient Portal.");
+      }
+
       setCurrentUser(data.user);
       if (onNotification) onNotification("Registration successful! Welcome to RUM Hospital.");
     } catch (err) {
@@ -119,9 +148,14 @@ export default function PatientPortalModal({ onClose, onNotification }) {
                   <p className="text-xs text-brand-700 font-semibold">
                     {currentUser.email}
                   </p>
-                  <span className="inline-block mt-1 text-[10px] font-bold bg-white px-2 py-0.5 rounded text-slate-600 border border-slate-200">
-                    Role: {currentUser.role || "Patient"}
-                  </span>
+                  <div className="flex items-center gap-1.5 mt-1.5">
+                    <span className="text-[10px] font-bold bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded border border-emerald-200">
+                      HCN: {currentUser.hcn_number || "RUM-2026-00101"}
+                    </span>
+                    <span className="text-[10px] font-bold bg-white text-brand-700 px-2 py-0.5 rounded border border-brand-200">
+                      Role: Verified Patient
+                    </span>
+                  </div>
                 </div>
               </div>
 
