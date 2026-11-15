@@ -3,19 +3,29 @@
 Generated using Django & Django REST Framework.
 """
 
+import sys
 from datetime import timedelta
 from pathlib import Path
+from decouple import config, Csv
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-rum-hospital-super-secret-key-prod-and-dev-mode"
+SECRET_KEY = config(
+    "SECRET_KEY",
+    default="django-insecure-rum-hospital-super-secret-key-prod-and-dev-mode",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config("DEBUG", default=True, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = config(
+    "ALLOWED_HOSTS",
+    default="127.0.0.1,localhost,*",
+    cast=Csv(),
+)
 
 # Application definition
 INSTALLED_APPS = [
@@ -25,7 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third-party DRF libraries
+    # Third-party DRF & Middleware libraries
     "corsheaders",
     "rest_framework",
     "rest_framework_simplejwt",
@@ -66,14 +76,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "config.wsgi.application"
 
-# Database
-# https://docs.djangoproject.com/en/stable/ref/settings/#databases
+# Database Configuration with PostgreSQL High-Concurrency Support and SQLite dev fallback
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
+    "default": config(
+        "DATABASE_URL",
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        cast=dj_database_url.parse,
+    )
 }
+
+# Apply connection optimizations when running PostgreSQL
+if "postgresql" in DATABASES["default"].get("ENGINE", ""):
+    DATABASES["default"]["CONN_MAX_AGE"] = 60  # Keeps connections alive for 60s
+    DATABASES["default"]["OPTIONS"] = {
+        "connect_timeout": 5,
+        "keepalives": 1,
+        "keepalives_idle": 30,
+        "keepalives_interval": 10,
+        "keepalives_count": 5,
+    }
 
 # Custom User Model
 AUTH_USER_MODEL = "api.User"
@@ -126,3 +147,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
 
+# Speed up test suite execution
+if "test" in sys.argv:
+    PASSWORD_HASHERS = [
+        "django.contrib.auth.hashers.MD5PasswordHasher",
+    ]
