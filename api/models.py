@@ -74,6 +74,19 @@ class User(AbstractUser):
         return f"{self.full_name} ({self.email}) - {self.role}"
 
 
+class Department(models.Model):
+    """Clinical Departments: Cardiology, Neurology, Nephrology, etc."""
+
+    name = models.CharField(max_length=100, unique=True)
+    code = models.CharField(max_length=10, unique=True)  # e.g. CARD, NEUR
+    description = models.TextField(blank=True)
+    icon_name = models.CharField(max_length=50, default="Stethoscope")
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.name} ({self.code})"
+
+
 class Doctor(models.Model):
     """Doctor model representing healthcare providers in RUM Hospital."""
 
@@ -90,6 +103,28 @@ class Doctor(models.Model):
     specialization = models.CharField(max_length=100)
     visiting_fee = models.DecimalField(max_digits=10, decimal_places=2)
 
+    # Production extensions
+    department_ref = models.ForeignKey(
+        Department,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="doctors",
+    )
+    designation = models.CharField(
+        max_length=150, blank=True, default="Specialist Consultant"
+    )
+    qualifications = models.CharField(
+        max_length=200, blank=True, default="MBBS, FCPS"
+    )
+    experience_years = models.PositiveIntegerField(default=5)
+    room_number = models.CharField(
+        max_length=50, blank=True, default="OPD Room 101"
+    )
+    visiting_hours = models.CharField(
+        max_length=100, blank=True, default="5:00 PM - 9:00 PM"
+    )
+
     def clean(self):
         super().clean()
         if self.visiting_fee is not None and self.visiting_fee < 0:
@@ -101,6 +136,33 @@ class Doctor(models.Model):
 
     def __str__(self):
         return f"Dr. {self.name} - {self.department} ({self.specialization})"
+
+
+class DoctorSlot(models.Model):
+    """Discrete consultation time slots preventing double-booking race conditions."""
+
+    doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name="slots")
+    date = models.DateField(db_index=True)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
+    is_booked = models.BooleanField(default=False)
+    booked_by = models.ForeignKey(
+        User,
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="booked_slots",
+    )
+
+    class Meta:
+        unique_together = ("doctor", "date", "start_time")
+        indexes = [
+            models.Index(fields=["doctor", "date", "is_booked"]),
+        ]
+
+    def __str__(self):
+        status_text = "BOOKED" if self.is_booked else "AVAILABLE"
+        return f"Dr. {self.doctor.name} on {self.date} at {self.start_time} [{status_text}]"
 
 
 class Appointment(models.Model):
@@ -119,11 +181,25 @@ class Appointment(models.Model):
     doctor = models.ForeignKey(
         Doctor, on_delete=models.CASCADE, related_name="appointments"
     )
+    slot = models.ForeignKey(
+        DoctorSlot,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="appointments",
+    )
     appointment_date = models.DateField()
     appointment_time = models.TimeField()
     status = models.CharField(
         max_length=20, choices=STATUS_CHOICES, default="Pending"
     )
+    symptoms = models.TextField(blank=True, default="")
+
+    class Meta:
+        indexes = [
+            models.Index(fields=["doctor", "appointment_date", "status"]),
+            models.Index(fields=["patient", "appointment_date"]),
+        ]
 
     def clean(self):
         super().clean()
@@ -187,7 +263,6 @@ class Bill(models.Model):
             raise ValidationError(errors)
 
     def save(self, *args, **kwargs):
-        # Auto-compute total_amount
         consultation = self.consultation_fee or 0
         disc = self.discount or 0
         self.total_amount = consultation - disc
@@ -196,3 +271,79 @@ class Bill(models.Model):
 
     def __str__(self):
         return f"Bill #{self.id} for Appointment #{self.appointment_id} - Total: {self.total_amount}"
+
+
+class PatientProfile(models.Model):
+    """Permanent Hospital Identification Number (HCN) and clinical history."""
+
+    BLOOD_GROUPS = (
+        ("A+", "A+"),
+        ("A-", "A-"),
+        ("B+", "B+"),
+        ("B-", "B-"),
+        ("O+", "O+"),
+        ("O-", "O-"),
+        ("AB+", "AB+"),
+        ("AB-", "AB-"),
+    )
+    GENDER_CHOICES = (
+        ("Male", "Male"),
+        ("Female", "Female"),
+        ("Other", "Other"),
+    )
+
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, related_name="patient_profile"
+    )
+    hcn_number = models.CharField(max_length=25, unique=True, db_index=True)
+    blood_group = models.CharField(max_length=5, choices=BLOOD_GROUPS, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES, default="Male")
+    emergency_contact_name = models.CharField(max_length=150, blank=True)
+    emergency_contact_phone = models.CharField(max_length=20, blank=True)
+    medical_allergies = models.TextField(blank=True)
+
+    def __str__(self):
+        return f"{self.hcn_number} - {self.user.full_name}"
+
+
+class PaymentTransaction(models.Model):
+    """Immutable ledger of payment attempts, gateway references, and audit logs."""
+
+    STATUS_CHOICES = (
+        ("INITIATED", "INITIATED"),
+        ("PENDING", "PENDING"),
+        ("SUCCESS", "SUCCESS"),
+        ("FAILED", "FAILED"),
+        ("CANCELLED", "CANCELLED"),
+    )
+    GATEWAY_CHOICES = (
+        ("SSLCOMMERZ", "SSLCommerz"),
+        ("BKASH", "bKash"),
+        ("STRIPE", "Stripe"),
+        ("CASH", "Cash Counter"),
+    )
+
+    transaction_id = models.CharField(max_length=64, unique=True, db_index=True)
+    bill = models.ForeignKey(
+        Bill, on_delete=models.CASCADE, related_name="transactions"
+    )
+    patient = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="payments"
+    )
+    gateway = models.CharField(
+        max_length=20, choices=GATEWAY_CHOICES, default="SSLCOMMERZ"
+    )
+    amount = models.DecimalField(max_digits=12, decimal_places=2)
+    currency = models.CharField(max_length=3, default="BDT")
+    status = models.CharField(
+        max_length=20, choices=STATUS_CHOICES, default="INITIATED"
+    )
+
+    gateway_val_id = models.CharField(max_length=100, blank=True, null=True)
+    gateway_response = models.JSONField(default=dict, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.transaction_id} | {self.amount} {self.currency} [{self.status}]"
