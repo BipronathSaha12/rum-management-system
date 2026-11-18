@@ -56,7 +56,7 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
 
   const mobileDrawer = (
     <div
-      className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
+      className={`fixed inset-0 z-50 xl:hidden transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
         }`}
       role="dialog"
       aria-modal="true"
@@ -81,11 +81,11 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
               <img
                 src={rumLogo}
                 alt="RUM Hospital Official Logo"
-                className="w-10 h-10 rounded-xl object-contain shadow-xs bg-white border border-slate-100"
+                className="w-10 h-10 rounded-xl object-contain shadow-xs bg-white border border-slate-100 shrink-0"
               />
               <div>
-                <span className="font-extrabold text-navy-900 tracking-tight text-base">RUM HOSPITAL</span>
-                <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider -mt-0.5">Tertiary Care</p>
+                <span className="font-extrabold text-navy-900 tracking-tight text-base whitespace-nowrap">RUM HOSPITAL</span>
+                <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider -mt-0.5 whitespace-nowrap">Tertiary Care</p>
               </div>
             </div>
             <button
@@ -172,32 +172,32 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
   return (
     <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-20 gap-4">
 
-          {/* Brand Logo */}
-          <a href="#" className="flex items-center gap-3 group">
+          {/* Brand Logo - Fixed No-Shrink Container to Prevent Collisions */}
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
             <img
               src={rumLogo}
               alt="RUM Hospital Official Logo"
-              className="w-12 h-12 rounded-xl object-contain shadow-md shadow-slate-200 group-hover:scale-105 transition-transform bg-white border border-slate-100"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl object-contain shadow-md shadow-slate-200 group-hover:scale-105 transition-transform bg-white border border-slate-100 shrink-0"
             />
-            <div>
+            <div className="shrink-0">
               <div className="flex items-center gap-1.5">
-                <span className="text-2xl font-extrabold tracking-tight text-navy-900">
+                <span className="text-xl sm:text-2xl font-extrabold tracking-tight text-navy-900 whitespace-nowrap">
                   RUM
                 </span>
-                <span className="text-2xl font-bold tracking-tight text-brand-600">
+                <span className="text-xl sm:text-2xl font-bold tracking-tight text-brand-600 whitespace-nowrap">
                   HOSPITAL
                 </span>
               </div>
-              <p className="text-[10px] font-semibold tracking-wider uppercase text-slate-600 -mt-1">
+              <p className="text-[10px] font-semibold tracking-wider uppercase text-slate-600 -mt-1 whitespace-nowrap">
                 Tertiary Care & Medical Center
               </p>
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav aria-label="Primary Navigation" className="hidden lg:flex items-center gap-6 xl:gap-8">
+          {/* Desktop Navigation Links (Visible on xl 1280px+ with strict whitespace-nowrap to prevent text wrapping or collisions) */}
+          <nav aria-label="Primary Navigation" className="hidden xl:flex items-center gap-4 2xl:gap-6 min-w-0">
             {navLinks.map((link) => (
               <a
                 key={link.name}
@@ -206,7 +206,7 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
                   e.preventDefault();
                   handleNavClick(link.href);
                 }}
-                className="text-sm font-semibold text-slate-700 hover:text-brand-700 transition-colors py-2"
+                className="text-xs 2xl:text-sm font-bold text-slate-700 hover:text-brand-700 transition-colors py-2 px-1 whitespace-nowrap"
               >
                 {link.name}
               </a>
@@ -214,50 +214,50 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
           </nav>
 
           {/* Desktop Actions */}
-          <div className="hidden sm:flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 lg:gap-3 shrink-0">
             <button
               onClick={onOpenPortal}
-              className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-2.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all shadow-subtle"
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all shadow-subtle whitespace-nowrap"
             >
-              <User className="w-4 h-4 text-brand-600" />
+              <User className="w-4 h-4 text-brand-600 shrink-0" />
               <span>Patient Portal</span>
             </button>
 
             <button
               onClick={() => onOpenBooking(null)}
-              className="flex items-center gap-2 text-xs font-bold px-4 py-2.5 rounded-lg bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white shadow-md shadow-brand-600/25 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+              className="flex items-center gap-2 text-xs font-bold px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-lg bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white shadow-md shadow-brand-600/25 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap"
             >
-              <Calendar className="w-4 h-4" />
+              <Calendar className="w-4 h-4 shrink-0" />
               <span>Book Appointment</span>
             </button>
           </div>
 
-            {/* Mobile & Tablet Navigation Controls (Visible below lg / 1024px) */}
-            <div className="flex lg:hidden items-center gap-2">
-              <button
-                onClick={() => onOpenBooking(null)}
-                className="bg-brand-700 hover:bg-brand-800 text-white p-2 rounded-lg text-xs font-bold flex items-center justify-center shadow-sm transition-colors sm:hidden"
-                title="Book Doctor Appointment"
-                aria-label="Book Doctor Appointment"
-              >
-                <Calendar className="w-4 h-4" aria-hidden="true" />
-                <span className="sr-only">Book Doctor Appointment</span>
-              </button>
+          {/* Mobile & Tablet Navigation Controls (Visible below xl / 1280px) */}
+          <div className="flex xl:hidden items-center gap-2 shrink-0">
+            <button
+              onClick={() => onOpenBooking(null)}
+              className="bg-brand-700 hover:bg-brand-800 text-white p-2 rounded-lg text-xs font-bold flex items-center justify-center shadow-sm transition-colors sm:hidden"
+              title="Book Doctor Appointment"
+              aria-label="Book Doctor Appointment"
+            >
+              <Calendar className="w-4 h-4" aria-hidden="true" />
+              <span className="sr-only">Book Doctor Appointment</span>
+            </button>
 
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
-                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-                title={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-                aria-expanded={mobileMenuOpen}
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
-                <span className="sr-only">{mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}</span>
-              </button>
-            </div>
-
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              title={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+              <span className="sr-only">{mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}</span>
+            </button>
           </div>
+
         </div>
+      </div>
 
       {/* Render Mobile Drawer directly into document.body to break out of containing blocks & guarantee 100% opaque full-viewport coverage */}
       {typeof document !== 'undefined' ? createPortal(mobileDrawer, document.body) : mobileDrawer}
