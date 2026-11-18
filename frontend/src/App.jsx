@@ -62,89 +62,89 @@ export default function App() {
       </header>
 
       {/* Main Content Sections */}
-      <main id="main-content" className="flex-1">
-        {/* 3. Hero Banner with Clinical Value Proposition */}
-        <HeroSection
-          onOpenBooking={handleOpenBooking}
-          onSearchClick={() => {
-            const el = document.getElementById('doctors');
-            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }}
+        <main id="main-content" className="flex-1">
+          {/* 3. Hero Banner with Clinical Value Proposition */}
+          <HeroSection
+            onOpenBooking={handleOpenBooking}
+            onSearchClick={() => {
+              const el = document.getElementById('doctors');
+              if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }}
+          />
+
+          {/* 4. Four Rapid Access Pillars (Find Doctor, Reports, Packages, Emergency) */}
+          <FourPillars />
+
+          {/* 5. Clinical Departments & Specialty Centers */}
+          <DepartmentsSection onSelectDepartment={handleSelectDepartment} />
+
+          {/* 6. Comprehensive Doctor Directory with Real-Time Multi-Filter */}
+          <DoctorDirectory
+            initialDepartment={selectedDeptForFilter}
+            onSelectDoctorForBooking={(doc) => handleOpenBooking(doc)}
+            onViewDoctorProfile={(doc) => setSelectedDoctorForProfile(doc)}
+          />
+
+          {/* 7. Online Diagnostic Reports Portal (HCN + Invoice PIN Engine) */}
+          <OnlineReportsSection />
+
+          {/* 8. Hospital Milestone Statistics & Quality Metrics */}
+          <HospitalStats />
+
+          {/* 9. Health Check-up Packages Section */}
+          <HealthPackagesSection onBookPackage={handleBookPackage} />
+
+          {/* 10. 24/7 Emergency & Critical Trauma Care Center */}
+          <EmergencyTraumaSection />
+
+          {/* 11. Campus Location, Directions & Contact Information */}
+          <ContactLocationSection />
+        </main>
+
+        {/* 12. Institutional Institutional Footer */}
+        <Footer
+          onOpenBooking={() => handleOpenBooking(null)}
+          onOpenPortal={() => setIsPortalModalOpen(true)}
         />
 
-        {/* 4. Four Rapid Access Pillars (Find Doctor, Reports, Packages, Emergency) */}
-        <FourPillars />
-
-        {/* 5. Clinical Departments & Specialty Centers */}
-        <DepartmentsSection onSelectDepartment={handleSelectDepartment} />
-
-        {/* 6. Comprehensive Doctor Directory with Real-Time Multi-Filter */}
-        <DoctorDirectory
-          initialDepartment={selectedDeptForFilter}
-          onSelectDoctorForBooking={(doc) => handleOpenBooking(doc)}
-          onViewDoctorProfile={(doc) => setSelectedDoctorForProfile(doc)}
+        {/* 13. Mobile Bottom Navigation (Sticky for Mobile screens) */}
+        <MobileBottomNav
+          onOpenBooking={() => handleOpenBooking(null)}
+          onOpenPortal={() => setIsPortalModalOpen(true)}
         />
 
-        {/* 7. Online Diagnostic Reports Portal (HCN + Invoice PIN Engine) */}
-        <OnlineReportsSection />
+        {/* Modals & Popups */}
+        {selectedDoctorForProfile && (
+          <DoctorModal
+            doctor={selectedDoctorForProfile}
+            onClose={() => setSelectedDoctorForProfile(null)}
+            onBookAppointment={(doc) => handleOpenBooking(doc)}
+          />
+        )}
 
-        {/* 8. Hospital Milestone Statistics & Quality Metrics */}
-        <HospitalStats />
+        {isBookingModalOpen && (
+          <AppointmentBookingModal
+            selectedDoctor={bookingDoctor}
+            onClose={() => {
+              setIsBookingModalOpen(false);
+              setBookingDoctor(null);
+            }}
+            onSuccess={(msg) => setToastMessage(msg)}
+          />
+        )}
 
-        {/* 9. Health Check-up Packages Section */}
-        <HealthPackagesSection onBookPackage={handleBookPackage} />
+        {isPortalModalOpen && (
+          <PatientPortalModal
+            onClose={() => setIsPortalModalOpen(false)}
+            onNotification={(msg) => setToastMessage(msg)}
+          />
+        )}
 
-        {/* 10. 24/7 Emergency & Critical Trauma Care Center */}
-        <EmergencyTraumaSection />
-
-        {/* 11. Campus Location, Directions & Contact Information */}
-        <ContactLocationSection />
-      </main>
-
-      {/* 12. Institutional Institutional Footer */}
-      <Footer
-        onOpenBooking={() => handleOpenBooking(null)}
-        onOpenPortal={() => setIsPortalModalOpen(true)}
-      />
-
-      {/* 13. Mobile Bottom Navigation (Sticky for Mobile screens) */}
-      <MobileBottomNav
-        onOpenBooking={() => handleOpenBooking(null)}
-        onOpenPortal={() => setIsPortalModalOpen(true)}
-      />
-
-      {/* Modals & Popups */}
-      {selectedDoctorForProfile && (
-        <DoctorModal
-          doctor={selectedDoctorForProfile}
-          onClose={() => setSelectedDoctorForProfile(null)}
-          onBookAppointment={(doc) => handleOpenBooking(doc)}
+        {/* Global Toast Banner */}
+        <ToastNotification
+          message={toastMessage}
+          onClose={() => setToastMessage("")}
         />
-      )}
-
-      {isBookingModalOpen && (
-        <AppointmentBookingModal
-          selectedDoctor={bookingDoctor}
-          onClose={() => {
-            setIsBookingModalOpen(false);
-            setBookingDoctor(null);
-          }}
-          onSuccess={(msg) => setToastMessage(msg)}
-        />
-      )}
-
-      {isPortalModalOpen && (
-        <PatientPortalModal
-          onClose={() => setIsPortalModalOpen(false)}
-          onNotification={(msg) => setToastMessage(msg)}
-        />
-      )}
-
-      {/* Global Toast Banner */}
-      <ToastNotification
-        message={toastMessage}
-        onClose={() => setToastMessage("")}
-      />
 
     </div>
   );

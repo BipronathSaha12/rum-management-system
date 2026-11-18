@@ -40,7 +40,7 @@ export default function DoctorModal({ doctor, onClose, onBookAppointment }) {
 
         {/* Modal Scrollable Body */}
         <div className="p-5 sm:p-6 overflow-y-auto space-y-6">
-          
+
           {/* Header Profile Info */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-5 text-center sm:text-left">
             <img
@@ -49,40 +49,40 @@ export default function DoctorModal({ doctor, onClose, onBookAppointment }) {
               className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover object-top border-4 border-brand-50 shadow-md shrink-0"
             />
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
-                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-                <span className="text-amber-900 font-extrabold">{doctor.rating}</span>
-                <span className="text-slate-600 font-medium">({doctor.reviewsCount} Patient Reviews)</span>
-              </div>
+                <div className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                  <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                  <span className="text-amber-900 font-extrabold">{doctor.rating}</span>
+                  <span className="text-slate-600 font-medium">({doctor.reviewsCount} Patient Reviews)</span>
+                </div>
 
-              <h2 className="text-xl sm:text-2xl font-extrabold text-navy-900">
-                {doctor.name}
-              </h2>
-              
-              <p className="text-sm font-semibold text-brand-700">
-                {doctor.designation}
-              </p>
+                <h2 className="text-xl sm:text-2xl font-extrabold text-navy-900">
+                  {doctor.name}
+                </h2>
 
-              <p className="text-xs text-slate-600 font-medium">
-                {doctor.qualifications}
-              </p>
+                  <p className="text-sm font-semibold text-brand-700">
+                    {doctor.designation}
+                  </p>
 
-              <div className="pt-1 flex items-center justify-center sm:justify-start gap-2">
-                <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
-                  {doctor.experience}
-                </span>
-                <span className="text-xs font-semibold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full">
-                  {doctor.department}
-                </span>
+                  <p className="text-xs text-slate-600 font-medium">
+                    {doctor.qualifications}
+                  </p>
+
+                  <div className="pt-1 flex items-center justify-center sm:justify-start gap-2">
+                      <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
+                        {doctor.experience}
+                      </span>
+                      <span className="text-xs font-semibold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full">
+                        {doctor.department}
+                      </span>
+                  </div>
               </div>
             </div>
-          </div>
 
-          {/* Biography */}
-          <div className="space-y-2">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
-              <BookOpen className="w-3.5 h-3.5 text-brand-700" />
-              <span>Professional Summary</span>
+            {/* Biography */}
+            <div className="space-y-2">
+                <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                  <BookOpen className="w-3.5 h-3.5 text-brand-700" />
+                  <span>Professional Summary</span>
             </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
               {doctor.bio}
@@ -120,37 +120,37 @@ export default function DoctorModal({ doctor, onClose, onBookAppointment }) {
                 ৳{doctor.visiting_fee.toLocaleString()}
               </p>
             </div>
-            <div className="text-right text-[11px] text-slate-600 font-medium">
-              <p className="font-bold text-emerald-800">✓ No Advance Payment Required</p>
-              <p>Pay at hospital cash counter</p>
+              <div className="text-right text-[11px] text-slate-600 font-medium">
+                <p className="font-bold text-emerald-800">✓ No Advance Payment Required</p>
+                <p>Pay at hospital cash counter</p>
+              </div>
             </div>
+
+          </div>
+
+          {/* Modal Footer CTA */}
+          <div className="p-4 sm:p-5 border-t border-slate-100 bg-white flex flex-col sm:flex-row items-center justify-between gap-3">
+            <a
+              href={`tel:${HOSPITAL_INFO.hotline}`}
+              className="w-full sm:w-auto flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-navy-900 py-2.5 px-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
+            >
+              <PhoneCall className="w-3.5 h-3.5 text-brand-600" />
+              <span>Serial by Phone: {HOSPITAL_INFO.hotline}</span>
+            </a>
+
+            <button
+              onClick={() => {
+                onClose();
+                onBookAppointment(doctor);
+              }}
+              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs shadow-md shadow-brand-700/30 transition-all"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Select Date & Book Slot</span>
+            </button>
           </div>
 
         </div>
-
-        {/* Modal Footer CTA */}
-        <div className="p-4 sm:p-5 border-t border-slate-100 bg-white flex flex-col sm:flex-row items-center justify-between gap-3">
-          <a
-            href={`tel:${HOSPITAL_INFO.hotline}`}
-            className="w-full sm:w-auto flex items-center justify-center gap-1.5 text-xs font-semibold text-slate-600 hover:text-navy-900 py-2.5 px-4 rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors"
-          >
-            <PhoneCall className="w-3.5 h-3.5 text-brand-600" />
-            <span>Serial by Phone: {HOSPITAL_INFO.hotline}</span>
-          </a>
-
-          <button
-            onClick={() => {
-              onClose();
-              onBookAppointment(doctor);
-            }}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md shadow-brand-600/30 transition-all"
-          >
-            <Calendar className="w-4 h-4" />
-            <span>Select Date & Book Slot</span>
-          </button>
-        </div>
-
       </div>
-    </div>
-  );
+      );
 }

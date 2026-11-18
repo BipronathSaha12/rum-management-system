@@ -57,13 +57,13 @@ export default function EmergencyTraumaSection() {
             </p>
 
             {/* Emergency Hotline Callout Card */}
-            <div className="p-6 rounded-2xl bg-clinical-emergency text-white shadow-xl shadow-red-600/25 space-y-4">
+            <div className="p-6 rounded-2xl bg-red-700 text-white shadow-xl shadow-red-700/30 space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-xs font-bold uppercase tracking-widest text-red-100">
+                  <p className="text-xs font-black uppercase tracking-widest text-white">
                     Hospital Emergency Helpline
                   </p>
-                  <p className="text-3xl sm:text-4xl font-black tracking-tight mt-1">
+                  <p className="text-3xl sm:text-4xl font-black tracking-tight mt-1 text-white">
                     {HOSPITAL_INFO.hotline}
                   </p>
                 </div>
@@ -72,10 +72,10 @@ export default function EmergencyTraumaSection() {
                 </div>
               </div>
 
-              <div className="pt-3 border-t border-red-500/80 flex items-center justify-between text-xs font-semibold text-red-100">
+              <div className="pt-3 border-t border-red-600 flex items-center justify-between text-xs font-bold text-white">
                 <a
                   href={`tel:${HOSPITAL_INFO.hotline}`}
-                  className="bg-white text-clinical-emergency font-extrabold px-4 py-2 rounded-xl shadow-xs hover:bg-red-50 transition-colors"
+                  className="bg-white text-red-800 font-black px-4 py-2 rounded-xl shadow-xs hover:bg-red-50 transition-colors"
                 >
                   Call Hotline 10602 Now
                 </a>

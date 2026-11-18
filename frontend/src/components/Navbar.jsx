@@ -13,27 +13,27 @@ import {
 } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
 
-  export default function Navbar({ onOpenPortal, onOpenBooking }) {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+export default function Navbar({ onOpenPortal, onOpenBooking }) {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    const navLinks = [
-      { name: "Find a Doctor", href: "#doctors" },
-      { name: "Departments", href: "#departments" },
-      { name: "Health Packages", href: "#packages" },
-      { name: "Online Reports", href: "#reports" },
-      { name: "Emergency Care", href: "#emergency" },
-      { name: "Contact & Location", href: "#contact" },
-    ];
+  const navLinks = [
+    { name: "Find a Doctor", href: "#doctors" },
+    { name: "Departments", href: "#departments" },
+    { name: "Health Packages", href: "#packages" },
+    { name: "Online Reports", href: "#reports" },
+    { name: "Emergency Care", href: "#emergency" },
+    { name: "Contact & Location", href: "#contact" },
+  ];
 
-    const handleNavClick = (href) => {
-      setMobileMenuOpen(false);
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    };
+  const handleNavClick = (href) => {
+    setMobileMenuOpen(false);
+    const element = document.querySelector(href);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
-    return (
+  return (
       <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
@@ -52,30 +52,30 @@ import { HOSPITAL_INFO } from '../data/hospitalData';
                     HOSPITAL
                   </span>
                 </div>
-                <p className="text-[10px] font-semibold tracking-wider uppercase text-slate-600 -mt-1">
-                  Tertiary Care & Medical Center
-                </p>
+                  <p className="text-[10px] font-semibold tracking-wider uppercase text-slate-600 -mt-1">
+                    Tertiary Care & Medical Center
+                  </p>
               </div>
             </a>
 
             {/* Desktop Navigation Links */}
-            <nav aria-label="Primary Navigation" className="hidden lg:flex items-center gap-6 xl:gap-8">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(link.href);
-                  }}
-                  className="text-sm font-semibold text-slate-700 hover:text-brand-700 transition-colors py-2"
-                >
-                  {link.name}
-                </a>
-              ))}
-            </nav>
+              <nav aria-label="Primary Navigation" className="hidden lg:flex items-center gap-6 xl:gap-8">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(link.href);
+                    }}
+                    className="text-sm font-semibold text-slate-700 hover:text-brand-700 transition-colors py-2"
+                  >
+                    {link.name}
+                  </a>
+                ))}
+              </nav>
 
-            {/* Desktop Actions */}
+              {/* Desktop Actions */}
               <div className="hidden sm:flex items-center gap-3">
                 <button
                   onClick={onOpenPortal}
@@ -94,24 +94,24 @@ import { HOSPITAL_INFO } from '../data/hospitalData';
                 </button>
               </div>
 
-            {/* Mobile Menu Button */}
-            <div className="flex sm:hidden items-center gap-2">
-              <button
-                onClick={() => onOpenBooking(null)}
-                className="bg-brand-600 text-white p-2 rounded-lg text-xs font-bold flex items-center justify-center shadow-sm"
-                title="Book Appointment"
-              >
-                <Calendar className="w-4 h-4" />
-              </button>
+              {/* Mobile Menu Button */}
+              <div className="flex sm:hidden items-center gap-2">
+                <button
+                  onClick={() => onOpenBooking(null)}
+                  className="bg-brand-700 text-white p-2 rounded-lg text-xs font-bold flex items-center justify-center shadow-sm"
+                  title="Book Appointment"
+                >
+                  <Calendar className="w-4 h-4" />
+                </button>
 
-              <button
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
-                aria-label="Toggle Navigation Menu"
-              >
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
-            </div>
+                <button
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
+                  aria-label="Toggle Navigation Menu"
+                >
+                  {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+                </button>
+              </div>
 
           </div>
         </div>
@@ -164,49 +164,49 @@ import { HOSPITAL_INFO } from '../data/hospitalData';
             </div>
 
             {/* Nav Links */}
-            <nav aria-label="Mobile Drawer Navigation" className="mt-6 flex flex-col gap-1">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    handleNavClick(link.href);
-                  }}
-                  className="flex items-center justify-between px-3 py-3 text-sm font-semibold text-slate-800 rounded-lg hover:bg-slate-50 hover:text-brand-700 transition-colors"
-                >
-                  <span>{link.name}</span>
-                  <ChevronRight className="w-4 h-4 text-slate-500" />
-                </a>
-              ))}
-            </nav>
+              <nav aria-label="Mobile Drawer Navigation" className="mt-6 flex flex-col gap-1">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      handleNavClick(link.href);
+                    }}
+                    className="flex items-center justify-between px-3 py-3 text-sm font-semibold text-slate-800 rounded-lg hover:bg-slate-50 hover:text-brand-700 transition-colors"
+                  >
+                    <span>{link.name}</span>
+                    <ChevronRight className="w-4 h-4 text-slate-500" />
+                  </a>
+                ))}
+              </nav>
           </div>
 
-            {/* Drawer Footer Actions */}
-            <div className="pt-6 border-t border-slate-100 space-y-3">
-              <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onOpenPortal();
-                }}
-                className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-slate-300 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
-              >
-                <User className="w-4 h-4 text-brand-600" />
-                <span>Patient Portal Login</span>
-              </button>
+          {/* Drawer Footer Actions */}
+          <div className="pt-6 border-t border-slate-100 space-y-3">
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenPortal();
+              }}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl border border-slate-300 text-sm font-semibold text-slate-700 hover:bg-slate-50 transition-colors"
+            >
+              <User className="w-4 h-4 text-brand-600" />
+              <span>Patient Portal Login</span>
+            </button>
 
-    <button
-      onClick={() => {
-        setMobileMenuOpen(false);
-        onOpenBooking(null);
-      }}
-      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-sm font-bold shadow-md shadow-brand-600/30 transition-colors"
-    >
-      <Calendar className="w-4 h-4" />
-      <span>Book Doctor Appointment</span>
-    </button>
-        </div>
-      </div>
-    </div>
+            <button
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenBooking(null);
+              }}
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-sm font-bold shadow-md shadow-brand-700/30 transition-colors"
+            >
+              <Calendar className="w-4 h-4" />
+              <span>Book Doctor Appointment</span>
+            </button>
+        </div >
+      </div >
+    </div >
   );
 }

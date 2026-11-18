@@ -20,10 +20,10 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Column: Headlines & Action CTAs */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-6">
-            
+
             {/* Accreditation Badge */}
             <div className="inline-flex items-center gap-2 bg-white px-3.5 py-1.5 rounded-full border border-brand-200/80 shadow-subtle text-xs font-semibold text-brand-800">
               <span className="w-2 h-2 rounded-full bg-clinical-green animate-pulse" />
@@ -49,7 +49,7 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
               <button
                 onClick={() => onOpenBooking(null)}
-                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-lg shadow-brand-600/30 hover:shadow-xl hover:shadow-brand-600/40 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
+                className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm shadow-lg shadow-brand-700/30 hover:shadow-xl hover:shadow-brand-700/40 transition-all transform hover:-translate-y-0.5 active:translate-y-0"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Book Appointment Online</span>
@@ -86,7 +86,7 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
           {/* Right Column: Visual Trust Card / Doctor Spotlight */}
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
-              
+
               {/* Doctor Visual Card */}
               <div className="rounded-3xl overflow-hidden bg-white shadow-2xl border border-slate-200/80 p-3 sm:p-4">
                 <div className="relative rounded-2xl overflow-hidden aspect-4/3 sm:aspect-16/11 bg-slate-100">
@@ -96,7 +96,7 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
                     className="w-full h-full object-cover object-top"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-navy-950/80 via-transparent to-transparent" />
-                  
+
                   {/* Floating Doctor Tag */}
                   <div className="absolute bottom-3 left-3 right-3 text-white">
                     <p className="text-xs font-semibold text-brand-300 uppercase tracking-wider">
@@ -110,39 +110,39 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
                 {/* Floating Quick Feature Strip */}
                 <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
-                      <Activity className="w-4 h-4" />
+                      <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
+                        <Activity className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <p className="font-bold text-slate-800">Available Today</p>
+                        <p className="text-[11px] text-slate-600 font-medium">OPD Room 304 (5 PM - 9 PM)</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="font-bold text-slate-800">Available Today</p>
-                      <p className="text-[11px] text-slate-600 font-medium">OPD Room 304 (5 PM - 9 PM)</p>
-                    </div>
+                    <button
+                      onClick={() => onOpenBooking(1)}
+                      className="bg-brand-700 hover:bg-brand-800 text-white font-bold px-3 py-1.5 rounded-lg text-xs shadow-xs transition-colors"
+                    >
+                      Select Slot
+                    </button>
                   </div>
-                  <button
-                    onClick={() => onOpenBooking(1)}
-                    className="bg-brand-600 hover:bg-brand-700 text-white font-bold px-3 py-1.5 rounded-lg text-xs shadow-xs transition-colors"
-                  >
-                    Select Slot
-                  </button>
                 </div>
-              </div>
 
-              {/* Floating Live Emergency Badge */}
-              <div className="absolute -bottom-4 -left-3 sm:-left-6 bg-white p-3 rounded-2xl shadow-xl border border-slate-200/90 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-red-100 text-clinical-emergency flex items-center justify-center font-black animate-bounce">
-                  🚨
+                {/* Floating Live Emergency Badge */}
+                <div className="absolute -bottom-4 -left-3 sm:-left-6 bg-white p-3 rounded-2xl shadow-xl border border-slate-200/90 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-xl bg-red-100 text-clinical-emergency flex items-center justify-center font-black animate-bounce">
+                    🚨
+                  </div>
+                  <div>
+                    <p className="text-[11px] font-bold text-slate-600 uppercase">Emergency Desk</p>
+                    <p className="text-sm font-extrabold text-navy-900">Hotline 10602</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-[11px] font-bold text-slate-600 uppercase">Emergency Desk</p>
-                  <p className="text-sm font-extrabold text-navy-900">Hotline 10602</p>
-                </div>
-              </div>
 
+              </div>
             </div>
-          </div>
 
+          </div>
         </div>
-      </div>
     </section>
   );
 }

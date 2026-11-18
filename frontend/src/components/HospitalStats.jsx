@@ -26,7 +26,7 @@ export default function HospitalStats() {
       <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-navy-800 border border-slate-700 text-xs font-semibold text-brand-300 mb-3">
@@ -55,9 +55,9 @@ export default function HospitalStats() {
                 <p className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white group-hover:text-brand-300 transition-colors">
                   {metric.value}
                 </p>
-                <p className="mt-1 text-[11px] sm:text-xs text-slate-300 font-medium leading-snug">
-                  {metric.label}
-                </p>
+                  <p className="mt-1 text-[11px] sm:text-xs text-slate-300 font-medium leading-snug">
+                    {metric.label}
+                  </p>
               </div>
             );
           })}

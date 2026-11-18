@@ -15,7 +15,7 @@ export default function ContactLocationSection() {
   return (
     <section id="contact" className="py-16 bg-white border-b border-slate-200 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-12">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
@@ -30,10 +30,10 @@ export default function ContactLocationSection() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Contact Details Column */}
           <div className="lg:col-span-5 space-y-4">
-            
+
             {/* Address Card */}
             <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 flex items-start gap-3.5">
               <div className="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center shrink-0 mt-0.5">
@@ -44,9 +44,9 @@ export default function ContactLocationSection() {
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   {HOSPITAL_INFO.address}
                 </p>
-                <span className="text-[11px] text-brand-700 font-bold block mt-1">
-                  Near Central City Interchange • 24/7 Car Parking
-                </span>
+                  <span className="text-[11px] text-brand-700 font-bold block mt-1">
+                    Near Central City Interchange • 24/7 Car Parking
+                  </span>
               </div>
             </div>
 
@@ -140,7 +140,7 @@ export default function ContactLocationSection() {
                 href="https://maps.google.com"
                 target="_blank"
                 rel="noreferrer"
-                className="bg-brand-600 hover:bg-brand-700 text-white font-bold px-4 py-2 rounded-xl shadow-xs transition-colors"
+                className="bg-brand-700 hover:bg-brand-800 text-white font-bold px-4 py-2 rounded-xl shadow-xs transition-colors"
               >
                 Get Driving Directions
               </a>

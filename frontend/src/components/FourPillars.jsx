@@ -54,37 +54,37 @@ export default function FourPillars({ onSelectTab }) {
   ];
 
   return (
-    <section aria-labelledby="rapid-services-title" className="relative -mt-6 sm:-mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
-      <h2 id="rapid-services-title" className="sr-only">Rapid Clinical Services & Emergency Access</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {pillars.map((item) => {
-          const Icon = item.icon;
-          return (
-            <a
-              key={item.id}
-              href={item.href}
-              className={`group bg-white p-6 rounded-2xl border border-slate-200/90 shadow-card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between ${item.borderHover}`}
-            >
-              <div>
-                <div className={`w-12 h-12 rounded-xl ${item.iconBg} flex items-center justify-center mb-4 transition-transform group-hover:scale-110`}>
-                  <Icon className="w-6 h-6 stroke-[2.2]" />
+      <section aria-labelledby="rapid-services-title" className="relative -mt-6 sm:-mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
+        <h2 id="rapid-services-title" className="sr-only">Rapid Clinical Services & Emergency Access</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {pillars.map((item) => {
+            const Icon = item.icon;
+            return (
+              <a
+                key={item.id}
+                href={item.href}
+                className={`group bg-white p-6 rounded-2xl border border-slate-200/90 shadow-card hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col justify-between ${item.borderHover}`}
+              >
+                <div>
+                  <div className={`w-12 h-12 rounded-xl ${item.iconBg} flex items-center justify-center mb-4 transition-transform group-hover:scale-110`}>
+                    <Icon className="w-6 h-6 stroke-[2.2]" />
+                  </div>
+                  <h3 className="text-base font-bold text-navy-900 group-hover:text-brand-700 transition-colors">
+                    {item.title}
+                  </h3>
+                    <p className="mt-1.5 text-xs text-slate-600 leading-relaxed font-medium">
+                      {item.subtitle}
+                    </p>
                 </div>
-                <h3 className="text-base font-bold text-navy-900 group-hover:text-brand-700 transition-colors">
-                  {item.title}
-                </h3>
-                <p className="mt-1.5 text-xs text-slate-600 leading-relaxed font-medium">
-                  {item.subtitle}
-                </p>
-              </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-700 group-hover:text-brand-800">
-                <span>{item.cta}</span>
-                <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
-              </div>
-            </a>
-          );
-        })}
-      </div>
-    </section>
-  );
+                  <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-700 group-hover:text-brand-800">
+                    <span>{item.cta}</span>
+                    <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
+                  </div>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+      );
 }

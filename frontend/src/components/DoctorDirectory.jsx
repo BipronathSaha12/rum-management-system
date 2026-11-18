@@ -69,7 +69,7 @@ export default function DoctorDirectory({
   return (
     <section id="doctors" className="py-16 bg-white border-b border-slate-200 scroll-mt-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-8">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-50 border border-brand-200 text-xs font-bold text-brand-700 uppercase tracking-wider mb-2">
@@ -98,17 +98,17 @@ export default function DoctorDirectory({
 
         {/* Results Count & Sorting Controls */}
         <div className="flex flex-col sm:flex-row items-center justify-between mb-6 pb-3 border-b border-slate-100 gap-3">
-          <div className="text-xs sm:text-sm text-slate-700 font-medium">
-            Showing <span className="font-bold text-navy-900">{filteredDoctors.length}</span> doctors available for consultation
-            {selectedDepartment !== "all" && (
+            <div className="text-xs sm:text-sm text-slate-700 font-medium">
+              Showing <span className="font-bold text-navy-900">{filteredDoctors.length}</span> doctors available for consultation
+              {selectedDepartment !== "all" && (
               <span className="text-brand-700 font-bold ml-1">in {selectedDepartment}</span>
-            )}
-          </div>
+              )}
+            </div>
 
-          <div className="flex items-center gap-2 text-xs">
-            <label htmlFor="doctor-sort-select" className="text-slate-700 font-semibold flex items-center gap-1">
-              <ArrowUpDown className="w-3.5 h-3.5" />
-              <span>Sort By:</span>
+            <div className="flex items-center gap-2 text-xs">
+                <label htmlFor="doctor-sort-select" className="text-slate-700 font-semibold flex items-center gap-1">
+                  <ArrowUpDown className="w-3.5 h-3.5" />
+                  <span>Sort By:</span>
             </label>
             <select
               id="doctor-sort-select"
@@ -144,91 +144,91 @@ export default function DoctorDirectory({
                       className="w-16 h-16 rounded-2xl object-cover object-top border-2 border-white shadow-md shadow-slate-200 shrink-0"
                     />
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-1 text-[11px] font-bold text-slate-800">
-                        <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-                        <span className="text-amber-900 font-extrabold">{doctor.rating}</span>
-                        <span className="text-slate-600 font-medium">({doctor.reviewsCount})</span>
-                      </div>
+                        <div className="flex items-center gap-1 text-[11px] font-bold text-slate-800">
+                          <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                          <span className="text-amber-900 font-extrabold">{doctor.rating}</span>
+                          <span className="text-slate-600 font-medium">({doctor.reviewsCount})</span>
+                        </div>
 
-                      <h3 className="text-base font-bold text-navy-900 group-hover:text-brand-700 transition-colors truncate">
-                        {doctor.name}
-                      </h3>
+                          <h3 className="text-base font-bold text-navy-900 group-hover:text-brand-700 transition-colors truncate">
+                            {doctor.name}
+                          </h3>
 
-                      <p className="text-xs font-semibold text-brand-700 truncate">
-                        {doctor.designation}
-                      </p>
+                            <p className="text-xs font-semibold text-brand-700 truncate">
+                              {doctor.designation}
+                            </p>
 
-                      <p className="text-[11px] text-slate-600 font-medium truncate mt-0.5">
-                        {doctor.qualifications}
-                      </p>
-                    </div>
-                  </div>
+                              <p className="text-[11px] text-slate-600 font-medium truncate mt-0.5">
+                                {doctor.qualifications}
+                              </p>
+                            </div>
+                          </div>
 
-                  {/* Department & Specialty Badge */}
-                  <div className="px-5 pb-3">
-                    <span className="inline-block text-[11px] font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">
-                      {doctor.department}
-                    </span>
-                  </div>
+                          {/* Department & Specialty Badge */}
+                          <div className="px-5 pb-3">
+                            <span className="inline-block text-[11px] font-semibold text-slate-700 bg-slate-100 px-2.5 py-1 rounded-lg">
+                              {doctor.department}
+                            </span>
+                          </div>
 
-                  {/* Doctor Metadata Details */}
-                  <div className="px-5 py-3 border-t border-slate-100 text-xs space-y-2 bg-slate-50/50">
-                    <div className="flex items-center gap-2 text-slate-700">
-                      <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                      <span className="truncate">{doctor.room_number}</span>
-                    </div>
+                          {/* Doctor Metadata Details */}
+                          <div className="px-5 py-3 border-t border-slate-100 text-xs space-y-2 bg-slate-50/50">
+                              <div className="flex items-center gap-2 text-slate-700">
+                                <MapPin className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                                <span className="truncate">{doctor.room_number}</span>
+                              </div>
 
-                    <div className="flex items-center gap-2 text-slate-700">
-                      <Clock className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                      <span className="truncate">{doctor.visiting_hours}</span>
-                    </div>
+                                <div className="flex items-center gap-2 text-slate-700">
+                                  <Clock className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                                  <span className="truncate">{doctor.visiting_hours}</span>
+                                </div>
 
-                    <div className="flex items-center justify-between pt-1">
-                      <span className="text-[11px] text-slate-600 font-medium">Visiting Fee:</span>
-                      <span className="text-sm font-extrabold text-navy-900">
-                        ৳{doctor.visiting_fee.toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
+                                <div className="flex items-center justify-between pt-1">
+                                  <span className="text-[11px] text-slate-600 font-medium">Visiting Fee:</span>
+                                  <span className="text-sm font-extrabold text-navy-900">
+                                    ৳{doctor.visiting_fee.toLocaleString()}
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
 
-                {/* Card Bottom CTA Actions */}
-                <div className="p-4 pt-3 border-t border-slate-100 bg-white grid grid-cols-2 gap-2">
-                  <button
-                    onClick={() => onViewDoctorProfile(doctor)}
-                    className="flex items-center justify-center gap-1 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors"
-                  >
-                    <Info className="w-3.5 h-3.5 text-slate-500" />
-                    <span>View Profile</span>
-                  </button>
+                            {/* Card Bottom CTA Actions */}
+                            <div className="p-4 pt-3 border-t border-slate-100 bg-white grid grid-cols-2 gap-2">
+                              <button
+                                onClick={() => onViewDoctorProfile(doctor)}
+                                className="flex items-center justify-center gap-1 py-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 hover:border-slate-300 transition-colors"
+                              >
+                                <Info className="w-3.5 h-3.5 text-slate-500" />
+                                <span>View Profile</span>
+                              </button>
 
-                  <button
-                    onClick={() => onSelectDoctorForBooking(doctor)}
-                    className="flex items-center justify-center gap-1.5 py-2 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-xs hover:shadow-md transition-all"
-                  >
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>Book Slot</span>
-                  </button>
-                </div>
+                              <button
+                                onClick={() => onSelectDoctorForBooking(doctor)}
+                                className="flex items-center justify-center gap-1.5 py-2 rounded-xl bg-brand-700 hover:bg-brand-800 text-white text-xs font-bold shadow-xs hover:shadow-md transition-all"
+                              >
+                                <Calendar className="w-3.5 h-3.5" />
+                                <span>Book Slot</span>
+                              </button>
+                            </div>
 
-              </div>
+                          </div>
             ))}
-          </div>
-        ) : (
-          <div className="text-center py-12 bg-slate-50 rounded-2xl border border-slate-200">
-            <UserCheck className="w-12 h-12 text-slate-400 mx-auto mb-3" />
-            <h3 className="text-base font-bold text-navy-900">No doctors match your search filters</h3>
-            <p className="text-xs text-slate-600 font-medium mt-1 mb-4">Try clearing your search query or selecting "All Departments".</p>
-            <button
-              onClick={handleReset}
-              className="text-xs font-bold text-brand-700 hover:text-brand-800 underline"
-            >
-              Reset All Filters
-            </button>
-          </div>
+                      </div>
+                      ) : (
+                      <div className="text-center py-12 bg-slate-50 rounded-2xl border border-slate-200">
+                        <UserCheck className="w-12 h-12 text-slate-400 mx-auto mb-3" />
+                        <h3 className="text-base font-bold text-navy-900">No doctors match your search filters</h3>
+                        <p className="text-xs text-slate-600 font-medium mt-1 mb-4">Try clearing your search query or selecting "All Departments".</p>
+                        <button
+                          onClick={handleReset}
+                          className="text-xs font-bold text-brand-700 hover:text-brand-800 underline"
+                        >
+                          Reset All Filters
+                        </button>
+                      </div>
         )}
 
-      </div>
-    </section>
-  );
+                    </div>
+                  </section>
+                  );
 }
