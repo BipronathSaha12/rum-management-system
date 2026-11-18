@@ -54,26 +54,26 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
               <div>
                 <span className="text-xl font-extrabold text-white tracking-tight">RUM</span>
                 <span className="text-xl font-bold text-brand-400 tracking-tight ml-1">HOSPITAL</span>
-                  <p className="text-[10px] text-slate-300 font-semibold tracking-wider uppercase">
-                    Tertiary Healthcare Center
-                  </p>
+                <p className="text-[10px] text-slate-300 font-semibold tracking-wider uppercase">
+                  Tertiary Healthcare Center
+                </p>
               </div>
             </div>
 
-              <p className="text-slate-300 text-xs leading-relaxed font-normal">
-                RUM Hospital is a multi-disciplinary tertiary care corporate hospital dedicated to providing international standard clinical treatments, modern diagnostics, and compassionate patient healing in Bangladesh.
-              </p>
+            <p className="text-slate-300 text-xs leading-relaxed font-normal">
+              RUM Hospital is a multi-disciplinary tertiary care corporate hospital dedicated to providing international standard clinical treatments, modern diagnostics, and compassionate patient healing in Bangladesh.
+            </p>
 
-              <div className="flex items-center gap-2 pt-2 text-emerald-400 font-semibold text-[11px]">
-                <ShieldCheck className="w-4 h-4" />
-                <span>Certified ISO 9001:2015 Healthcare Facility</span>
-              </div>
+            <div className="flex items-center gap-2 pt-2 text-emerald-400 font-semibold text-[11px]">
+              <ShieldCheck className="w-4 h-4" />
+              <span>Certified ISO 9001:2015 Healthcare Facility</span>
+            </div>
           </div>
 
           {/* Clinical Departments Column */}
           <div className="lg:col-span-3 space-y-3">
-              <h3 className="text-white text-xs font-bold uppercase tracking-wider">
-                Centers of Excellence
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider">
+              Centers of Excellence
             </h3>
             <ul className="space-y-2 text-slate-300">
               {DEPARTMENTS.slice(0, 6).map((dept) => (
@@ -88,8 +88,8 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
 
           {/* Quick Patient Links */}
           <div className="lg:col-span-2 space-y-3">
-              <h3 className="text-white text-xs font-bold uppercase tracking-wider">
-                Patient Services
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider">
+              Patient Services
             </h3>
             <ul className="space-y-2 text-slate-300">
               <li>
@@ -127,8 +127,8 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
 
           {/* Contact & Address */}
           <div className="lg:col-span-3 space-y-3">
-              <h3 className="text-white text-xs font-bold uppercase tracking-wider">
-                Hospital Contact Info
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider">
+              Hospital Contact Info
             </h3>
             <div className="space-y-2.5 text-slate-300">
               <p className="flex items-start gap-2">
@@ -158,15 +158,15 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
         </div>
 
         {/* Bottom Copyright */}
-          <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-300 font-medium text-[11px]">
-            <p>© 2026 RUM Hospital. All Rights Reserved. Built for high-volume hospital operations.</p>
-            <p className="flex items-center gap-1">
-              <span>Clinical Healthcare Architecture</span>
-              <Heart className="w-3 h-3 text-red-500 fill-red-500 inline" />
-              <span>Dedicated to Patient Well-being</span>
-            </p>
-          </div>
+        <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-300 font-medium text-[11px]">
+          <p>© 2026 RUM Hospital. All Rights Reserved. Built for high-volume hospital operations.</p>
+          <p className="flex items-center gap-1">
+            <span>Clinical Healthcare Architecture</span>
+            <Heart className="w-3 h-3 text-red-500 fill-red-500 inline" />
+            <span>Dedicated to Patient Well-being</span>
+          </p>
         </div>
+      </div>
     </footer>
   );
 }

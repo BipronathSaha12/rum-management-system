@@ -1,13 +1,11 @@
 import React from 'react';
 import {
   Calendar,
-  Search,
   FileText,
   ShieldCheck,
-  Award,
-  Users,
   Activity,
-  ArrowRight
+  ArrowRight,
+  PhoneCall
 } from 'lucide-react';
 import { HOSPITAL_INFO } from '../data/hospitalData';
 
@@ -87,6 +85,31 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
           <div className="lg:col-span-5 relative">
             <div className="relative mx-auto max-w-md lg:max-w-none">
 
+              {/* Floating Live Emergency Badge - Top-Right to prevent any collision with doctor schedule card */}
+              <a
+                href={`tel:${HOSPITAL_INFO.hotline}`}
+                aria-label={`Call 24/7 Emergency Desk Hotline ${HOSPITAL_INFO.hotline}`}
+                className="absolute -top-3.5 right-2 sm:-right-4 z-20 bg-white/95 backdrop-blur-sm px-3.5 py-2.5 rounded-2xl shadow-xl border border-red-100/90 hover:border-red-300 hover:shadow-2xl transition-all flex items-center gap-3 group"
+              >
+                <div className="w-10 h-10 rounded-xl bg-red-50 text-red-700 group-hover:bg-red-600 group-hover:text-white flex items-center justify-center transition-all shadow-xs shrink-0">
+                  <PhoneCall className="w-4 h-4 transition-transform group-hover:scale-110" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-red-600" />
+                    </span>
+                    <p className="text-[10px] font-bold text-red-700 uppercase tracking-wider">
+                      24/7 Emergency
+                    </p>
+                  </div>
+                  <p className="text-xs sm:text-sm font-extrabold text-navy-900 group-hover:text-red-700 transition-colors">
+                    Hotline {HOSPITAL_INFO.hotline}
+                  </p>
+                </div>
+              </a>
+
               {/* Doctor Visual Card */}
               <div className="rounded-3xl overflow-hidden bg-white shadow-2xl border border-slate-200/80 p-3 sm:p-4">
                 <div className="relative rounded-2xl overflow-hidden aspect-4/3 sm:aspect-16/11 bg-slate-100">
@@ -107,39 +130,32 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
                   </div>
                 </div>
 
-                {/* Floating Quick Feature Strip */}
+                {/* Quick Feature Strip - Unobstructed and clear */}
                 <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
-                        <Activity className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <p className="font-bold text-slate-800">Available Today</p>
-                        <p className="text-[11px] text-slate-600 font-medium">OPD Room 304 (5 PM - 9 PM)</p>
-                      </div>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold shrink-0">
+                      <Activity className="w-4 h-4" />
                     </div>
-                    <button
-                      onClick={() => onOpenBooking(1)}
-                      className="bg-brand-700 hover:bg-brand-800 text-white font-bold px-3 py-1.5 rounded-lg text-xs shadow-xs transition-colors"
-                    >
-                      Select Slot
-                    </button>
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                        <p className="font-bold text-slate-800">Available Today</p>
+                      </div>
+                      <p className="text-[11px] text-slate-600 font-medium">OPD Room 304 (5 PM - 9 PM)</p>
+                    </div>
                   </div>
+                  <button
+                    onClick={() => onOpenBooking(1)}
+                    aria-label="Select Slot for Dr. Mahbub Rahman"
+                    className="bg-brand-700 hover:bg-brand-800 text-white font-bold px-3 py-1.5 rounded-lg text-xs shadow-xs transition-colors shrink-0"
+                  >
+                    Select Slot
+                  </button>
                 </div>
-
-                {/* Floating Live Emergency Badge */}
-                <div className="absolute -bottom-4 -left-3 sm:-left-6 bg-white p-3 rounded-2xl shadow-xl border border-slate-200/90 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-red-100 text-clinical-emergency flex items-center justify-center font-black animate-bounce">
-                    🚨
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-bold text-slate-600 uppercase">Emergency Desk</p>
-                    <p className="text-sm font-extrabold text-navy-900">Hotline 10602</p>
-                  </div>
-                </div>
-
               </div>
+
             </div>
+          </div>
 
           </div>
         </div>

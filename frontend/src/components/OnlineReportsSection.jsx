@@ -110,84 +110,84 @@ export default function OnlineReportsSection() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               {/* HCN Input */}
               <div>
-                  <label htmlFor="report-hcn-input" className="block text-xs font-bold text-slate-800 mb-1">
-                    Hospital Care No. (HCN) *
-                  </label>
-                  <input
-                    id="report-hcn-input"
-                    name="hcnNumber"
-                    aria-label="Hospital Care Number (HCN)"
-                    type="text"
-                    required
-                    placeholder="e.g. RUM-2026-00101"
-                    value={hcn}
-                    onChange={(e) => setHcn(e.target.value)}
-                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-mono text-slate-800"
-                  />
-                  <span className="text-[11px] text-slate-600 block mt-1 font-medium">Found on top of your bill</span>
+                <label htmlFor="report-hcn-input" className="block text-xs font-bold text-slate-800 mb-1">
+                  Hospital Care No. (HCN) *
+                </label>
+                <input
+                  id="report-hcn-input"
+                  name="hcnNumber"
+                  aria-label="Hospital Care Number (HCN)"
+                  type="text"
+                  required
+                  placeholder="e.g. RUM-2026-00101"
+                  value={hcn}
+                  onChange={(e) => setHcn(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-mono text-slate-800"
+                />
+                <span className="text-[11px] text-slate-600 block mt-1 font-medium">Found on top of your bill</span>
               </div>
 
               {/* Invoice Number */}
               <div>
-                  <label htmlFor="report-invoice-input" className="block text-xs font-bold text-slate-800 mb-1">
-                    Invoice / Bill No. *
-                  </label>
-                  <input
-                    id="report-invoice-input"
-                    name="invoiceNumber"
-                    aria-label="Invoice or Bill Number"
-                    type="text"
-                    required
-                    placeholder="e.g. INV-88901"
-                    value={invoice}
-                    onChange={(e) => setInvoice(e.target.value)}
-                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-mono text-slate-800"
-                  />
-                  <span className="text-[11px] text-slate-600 block mt-1 font-medium">Printed on money receipt</span>
+                <label htmlFor="report-invoice-input" className="block text-xs font-bold text-slate-800 mb-1">
+                  Invoice / Bill No. *
+                </label>
+                <input
+                  id="report-invoice-input"
+                  name="invoiceNumber"
+                  aria-label="Invoice or Bill Number"
+                  type="text"
+                  required
+                  placeholder="e.g. INV-88901"
+                  value={invoice}
+                  onChange={(e) => setInvoice(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-mono text-slate-800"
+                />
+                <span className="text-[11px] text-slate-600 block mt-1 font-medium">Printed on money receipt</span>
               </div>
 
               {/* Security PIN */}
               <div>
-                  <label htmlFor="report-pin-input" className="block text-xs font-bold text-slate-800 mb-1">
-                    Access PIN (4-Digits)
-                  </label>
-                  <input
-                    id="report-pin-input"
-                    name="securityPin"
-                    aria-label="Security Access PIN"
-                    type="password"
-                    maxLength="6"
-                    placeholder="e.g. 1234"
-                    value={pin}
-                    onChange={(e) => setPin(e.target.value)}
-                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-mono text-slate-800"
-                  />
-                  <span className="text-[11px] text-slate-600 block mt-1 font-medium">Optional for demo</span>
+                <label htmlFor="report-pin-input" className="block text-xs font-bold text-slate-800 mb-1">
+                  Access PIN (4-Digits)
+                </label>
+                <input
+                  id="report-pin-input"
+                  name="securityPin"
+                  aria-label="Security Access PIN"
+                  type="password"
+                  maxLength="6"
+                  placeholder="e.g. 1234"
+                  value={pin}
+                  onChange={(e) => setPin(e.target.value)}
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-mono text-slate-800"
+                />
+                <span className="text-[11px] text-slate-600 block mt-1 font-medium">Optional for demo</span>
               </div>
             </div>
 
             {/* Quick Demo Pre-fill helper */}
             <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 flex flex-wrap items-center justify-between gap-2 text-xs">
-                <span className="text-slate-700 font-semibold flex items-center gap-1.5">
-                  <HelpCircle className="w-3.5 h-3.5 text-brand-700" />
-                  <span>Test Live Demo Samples:</span>
-                </span>
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={() => handleFillDemo(0)}
-                    className="px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:border-brand-500 text-brand-800 font-bold text-[11px] transition-colors"
-                  >
-                    Load Sample 1 (CBC & Lipid)
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => handleFillDemo(1)}
-                    className="px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:border-brand-500 text-brand-800 font-bold text-[11px] transition-colors"
-                  >
-                    Load Sample 2 (Renal Profile)
-                  </button>
-                </div>
+              <span className="text-slate-700 font-semibold flex items-center gap-1.5">
+                <HelpCircle className="w-3.5 h-3.5 text-brand-700" />
+                <span>Test Live Demo Samples:</span>
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => handleFillDemo(0)}
+                  className="px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:border-brand-500 text-brand-800 font-bold text-[11px] transition-colors"
+                >
+                  Load Sample 1 (CBC & Lipid)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleFillDemo(1)}
+                  className="px-2.5 py-1 rounded-lg bg-white border border-slate-300 hover:border-brand-500 text-brand-800 font-bold text-[11px] transition-colors"
+                >
+                  Load Sample 2 (Renal Profile)
+                </button>
+              </div>
             </div>
 
             {/* Submit Button */}
@@ -316,8 +316,8 @@ export default function OnlineReportsSection() {
                             <td className="py-2 px-3 text-right">
                               <span
                                 className={`inline-block px-2 py-0.5 rounded text-[10px] font-bold ${r.status === "Normal" || r.status === "Optimal"
-                                    ? "bg-emerald-50 text-emerald-700"
-                                    : "bg-amber-50 text-amber-700"
+                                  ? "bg-emerald-50 text-emerald-700"
+                                  : "bg-amber-50 text-amber-700"
                                   }`}
                               >
                                 {r.status}

@@ -171,96 +171,96 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
 
   return (
     <div className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all">
-          <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-20 gap-3 2xl:gap-6">
+      <div className="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 gap-3 2xl:gap-6">
 
-                {/* Brand Logo - Fixed No-Shrink Container to Prevent Collisions */}
-                <a href="#" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
-                  <img
-                    src={rumLogo}
-                    alt="RUM Hospital Official Logo"
-                    className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-contain shadow-md shadow-slate-200 group-hover:scale-105 transition-transform bg-white border border-slate-100 shrink-0"
-                  />
-                  <div className="shrink-0">
-                    <div className="flex items-center gap-1.5">
-                      <span className="text-xl 2xl:text-2xl font-extrabold tracking-tight text-navy-900 whitespace-nowrap">
-                        RUM
-                      </span>
-                      <span className="text-xl 2xl:text-2xl font-bold tracking-tight text-brand-600 whitespace-nowrap">
-                        HOSPITAL
-                      </span>
-                    </div>
-                    <p className="text-[10px] font-semibold tracking-wider uppercase text-slate-500 -mt-1 whitespace-nowrap hidden sm:block">
-                      Tertiary Care & Medical Center
-                    </p>
-                  </div>
-                </a>
-
-                {/* Desktop Navigation Links (shrink-0 prevents flexbox from ever shrinking nav or overflowing links) */}
-                <nav aria-label="Primary Navigation" className="hidden xl:flex items-center gap-1 2xl:gap-2.5 shrink-0">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        handleNavClick(link.href);
-                      }}
-                      className="text-xs 2xl:text-sm font-semibold text-slate-700 hover:text-brand-700 hover:bg-slate-50 transition-colors py-1.5 px-2 2xl:px-2.5 rounded-lg whitespace-nowrap shrink-0"
-                    >
-                      {link.name}
-                    </a>
-                  ))}
-                </nav>
-
-                {/* Desktop Actions (shrink-0 with explicit left margin guarantees Patient Portal NEVER touches Contact & Location) */}
-                <div className="hidden sm:flex items-center gap-2 2xl:gap-3 shrink-0 ml-auto xl:ml-4 2xl:ml-8">
-                  <button
-                    onClick={onOpenPortal}
-                    className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 2xl:px-3.5 2xl:py-2.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all shadow-subtle whitespace-nowrap shrink-0"
-                  >
-                    <User className="w-4 h-4 text-brand-600 shrink-0" />
-                    <span>Patient Portal</span>
-                  </button>
-
-                    <button
-                      onClick={() => onOpenBooking(null)}
-                      className="flex items-center gap-1.5 2xl:gap-2 text-xs font-bold px-3.5 py-2 2xl:px-4 2xl:py-2.5 rounded-lg bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white shadow-md shadow-brand-600/25 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap shrink-0"
-                    >
-                      <Calendar className="w-4 h-4 shrink-0" />
-                      <span>Book Appointment</span>
-                    </button>
-                  </div>
-
-                {/* Mobile & Tablet Navigation Controls (Visible below xl / 1280px) */}
-                <div className="flex xl:hidden items-center gap-2 shrink-0">
-                  <button
-                    onClick={() => onOpenBooking(null)}
-                    className="bg-brand-700 hover:bg-brand-800 text-white p-2 rounded-lg text-xs font-bold flex items-center justify-center shadow-sm transition-colors sm:hidden"
-                    title="Book Doctor Appointment"
-                    aria-label="Book Doctor Appointment"
-                  >
-                    <Calendar className="w-4 h-4" aria-hidden="true" />
-                    <span className="sr-only">Book Doctor Appointment</span>
-                  </button>
-
-                  <button
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
-                    aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-                    title={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-                    aria-expanded={mobileMenuOpen}
-                  >
-                    {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
-                    <span className="sr-only">{mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}</span>
-                  </button>
-                </div>
-
+          {/* Brand Logo - Fixed No-Shrink Container to Prevent Collisions */}
+          <a href="#" className="flex items-center gap-2.5 sm:gap-3 group shrink-0">
+            <img
+              src={rumLogo}
+              alt="RUM Hospital Official Logo"
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl object-contain shadow-md shadow-slate-200 group-hover:scale-105 transition-transform bg-white border border-slate-100 shrink-0"
+            />
+            <div className="shrink-0">
+              <div className="flex items-center gap-1.5">
+                <span className="text-xl 2xl:text-2xl font-extrabold tracking-tight text-navy-900 whitespace-nowrap">
+                  RUM
+                </span>
+                <span className="text-xl 2xl:text-2xl font-bold tracking-tight text-brand-600 whitespace-nowrap">
+                  HOSPITAL
+                </span>
+              </div>
+              <p className="text-[10px] font-semibold tracking-wider uppercase text-slate-500 -mt-1 whitespace-nowrap hidden sm:block">
+                Tertiary Care & Medical Center
+              </p>
             </div>
+          </a>
+
+          {/* Desktop Navigation Links (shrink-0 prevents flexbox from ever shrinking nav or overflowing links) */}
+          <nav aria-label="Primary Navigation" className="hidden xl:flex items-center gap-1 2xl:gap-2.5 shrink-0">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick(link.href);
+                }}
+                className="text-xs 2xl:text-sm font-semibold text-slate-700 hover:text-brand-700 hover:bg-slate-50 transition-colors py-1.5 px-2 2xl:px-2.5 rounded-lg whitespace-nowrap shrink-0"
+              >
+                {link.name}
+              </a>
+            ))}
+          </nav>
+
+          {/* Desktop Actions (shrink-0 with explicit left margin guarantees Patient Portal NEVER touches Contact & Location) */}
+          <div className="hidden sm:flex items-center gap-2 2xl:gap-3 shrink-0 ml-auto xl:ml-4 2xl:ml-8">
+            <button
+              onClick={onOpenPortal}
+              className="flex items-center gap-1.5 text-xs font-semibold px-3 py-2 2xl:px-3.5 2xl:py-2.5 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 transition-all shadow-subtle whitespace-nowrap shrink-0"
+            >
+              <User className="w-4 h-4 text-brand-600 shrink-0" />
+              <span>Patient Portal</span>
+            </button>
+
+            <button
+              onClick={() => onOpenBooking(null)}
+              className="flex items-center gap-1.5 2xl:gap-2 text-xs font-bold px-3.5 py-2 2xl:px-4 2xl:py-2.5 rounded-lg bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white shadow-md shadow-brand-600/25 hover:shadow-lg transition-all transform hover:-translate-y-0.5 active:translate-y-0 whitespace-nowrap shrink-0"
+            >
+              <Calendar className="w-4 h-4 shrink-0" />
+              <span>Book Appointment</span>
+            </button>
           </div>
 
-          {/* Render Mobile Drawer directly into document.body to break out of containing blocks & guarantee 100% opaque full-viewport coverage */}
-          {typeof document !== 'undefined' ? createPortal(mobileDrawer, document.body) : mobileDrawer}
+          {/* Mobile & Tablet Navigation Controls (Visible below xl / 1280px) */}
+          <div className="flex xl:hidden items-center gap-2 shrink-0">
+            <button
+              onClick={() => onOpenBooking(null)}
+              className="bg-brand-700 hover:bg-brand-800 text-white p-2 rounded-lg text-xs font-bold flex items-center justify-center shadow-sm transition-colors sm:hidden"
+              title="Book Doctor Appointment"
+              aria-label="Book Doctor Appointment"
+            >
+              <Calendar className="w-4 h-4" aria-hidden="true" />
+              <span className="sr-only">Book Doctor Appointment</span>
+            </button>
+
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
+              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              title={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+              aria-expanded={mobileMenuOpen}
+            >
+              {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+              <span className="sr-only">{mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}</span>
+            </button>
+          </div>
+
         </div>
-        );
+      </div>
+
+      {/* Render Mobile Drawer directly into document.body to break out of containing blocks & guarantee 100% opaque full-viewport coverage */}
+      {typeof document !== 'undefined' ? createPortal(mobileDrawer, document.body) : mobileDrawer}
+    </div>
+  );
 }
