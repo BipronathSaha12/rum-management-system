@@ -1,4 +1,5 @@
 import React from 'react';
+import rumLogo from '../public/RUM_logo.png';
 import {
   Plus,
   Phone,
@@ -45,9 +46,11 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
           {/* Brand Bio */}
           <div className="lg:col-span-4 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-brand-600 flex items-center justify-center text-white">
-                <Plus className="w-6 h-6 stroke-[2.5]" />
-              </div>
+              <img
+                src={rumLogo}
+                alt="RUM Hospital Official Logo"
+                className="w-11 h-11 rounded-xl object-contain bg-white p-0.5 shadow-md shadow-slate-900 border border-slate-700"
+              />
               <div>
                 <span className="text-xl font-extrabold text-white tracking-tight">RUM</span>
                 <span className="text-xl font-bold text-brand-400 tracking-tight ml-1">HOSPITAL</span>

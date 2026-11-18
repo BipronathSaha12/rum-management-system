@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import rumLogo from '../public/RUM_logo.png';
 import {
   FileText,
   Search,
@@ -233,10 +234,17 @@ export default function OnlineReportsSection() {
 
                 {/* Hospital Institutional Header */}
                 <div className="flex items-start justify-between pb-4 border-b-2 border-slate-800">
-                  <div>
-                    <h2 className="text-xl font-extrabold text-navy-900 tracking-tight">RUM HOSPITAL</h2>
-                    <p className="text-[10px] text-slate-500 font-semibold">{HOSPITAL_INFO.address}</p>
-                    <p className="text-[10px] text-slate-500">Helpline: {HOSPITAL_INFO.hotline} | {HOSPITAL_INFO.email}</p>
+                  <div className="flex items-center gap-3">
+                    <img
+                      src={rumLogo}
+                      alt="RUM Hospital Official Logo"
+                      className="w-12 h-12 rounded-xl object-contain bg-white border border-slate-200 shadow-xs"
+                    />
+                    <div>
+                      <h2 className="text-xl font-extrabold text-navy-900 tracking-tight">RUM HOSPITAL</h2>
+                      <p className="text-[10px] text-slate-500 font-semibold">{HOSPITAL_INFO.address}</p>
+                      <p className="text-[10px] text-slate-500">Helpline: {HOSPITAL_INFO.hotline} | {HOSPITAL_INFO.email}</p>
+                    </div>
                   </div>
                   <div className="text-right">
                     <span className="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 font-bold text-xs">

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import rumLogo from '../public/RUM_logo.png';
 import {
   Menu,
   X,
@@ -77,9 +78,11 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
           {/* Drawer Header */}
           <div className="flex items-center justify-between pb-4 border-b border-slate-100">
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20">
-                <Plus className="w-5 h-5 stroke-[2.5]" />
-              </div>
+              <img
+                src={rumLogo}
+                alt="RUM Hospital Official Logo"
+                className="w-10 h-10 rounded-xl object-contain shadow-xs bg-white border border-slate-100"
+              />
               <div>
                 <span className="font-extrabold text-navy-900 tracking-tight text-base">RUM HOSPITAL</span>
                 <p className="text-[10px] font-semibold text-slate-500 uppercase tracking-wider -mt-0.5">Tertiary Care</p>
@@ -173,9 +176,11 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
 
           {/* Brand Logo */}
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-              <Plus className="w-7 h-7 stroke-[2.5]" />
-            </div>
+            <img
+              src={rumLogo}
+              alt="RUM Hospital Official Logo"
+              className="w-12 h-12 rounded-xl object-contain shadow-md shadow-slate-200 group-hover:scale-105 transition-transform bg-white border border-slate-100"
+            />
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="text-2xl font-extrabold tracking-tight text-navy-900">

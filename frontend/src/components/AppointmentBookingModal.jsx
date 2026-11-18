@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import rumLogo from '../public/RUM_logo.png';
 import {
   X,
   Calendar,
@@ -141,9 +142,16 @@ export default function AppointmentBookingModal({
               {/* Digital Slip Card */}
               <div className="p-5 rounded-2xl bg-slate-50 border-2 border-dashed border-slate-300 space-y-4 text-xs">
                 <div className="flex items-center justify-between pb-3 border-b border-slate-200">
-                  <div>
-                    <p className="font-extrabold text-navy-900 text-sm">RUM HOSPITAL</p>
-                    <p className="text-[10px] text-slate-500">OPD Consultation Serial Slip</p>
+                  <div className="flex items-center gap-2.5">
+                    <img
+                      src={rumLogo}
+                      alt="RUM Hospital Official Logo"
+                      className="w-9 h-9 rounded-lg object-contain bg-white border border-slate-200 shadow-xs"
+                    />
+                    <div>
+                      <p className="font-extrabold text-navy-900 text-sm">RUM HOSPITAL</p>
+                      <p className="text-[10px] text-slate-500">OPD Consultation Serial Slip</p>
+                    </div>
                   </div>
                   <div className="text-right">
                     <span className="inline-block bg-brand-600 text-white font-extrabold px-2.5 py-1 rounded-md text-xs">
