@@ -55,9 +55,8 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
 
   const mobileDrawer = (
     <div
-      className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${
-        mobileMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
-      }`}
+      className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ${mobileMenuOpen ? 'opacity-100 pointer-events-auto visible' : 'opacity-0 pointer-events-none invisible'
+        }`}
       role="dialog"
       aria-modal="true"
       aria-label="Mobile Navigation Menu"
@@ -71,9 +70,8 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
 
       {/* Solid Opaque White Slide-Out Drawer (Portal mounted directly to body to prevent stacking context or background text bleeding) */}
       <div
-        className={`fixed top-0 right-0 z-50 w-full max-w-xs sm:max-w-sm h-screen h-[100dvh] bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto transform transition-transform duration-300 ease-in-out ${
-          mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        className={`fixed top-0 right-0 z-50 w-full max-w-xs sm:max-w-sm h-screen h-[100dvh] bg-white shadow-2xl p-6 flex flex-col justify-between overflow-y-auto transform transition-transform duration-300 ease-in-out ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'
+          }`}
       >
         <div>
           {/* Drawer Header */}
@@ -229,32 +227,32 @@ export default function Navbar({ onOpenPortal, onOpenBooking }) {
             </button>
           </div>
 
-          {/* Mobile & Tablet Navigation Controls (Visible below lg / 1024px) */}
-          <div className="flex lg:hidden items-center gap-2">
-            <button
-              onClick={() => onOpenBooking(null)}
-              className="bg-brand-700 hover:bg-brand-800 text-white p-2 rounded-lg text-xs font-bold flex items-center justify-center shadow-sm transition-colors sm:hidden"
-              title="Book Doctor Appointment"
-              aria-label="Book Doctor Appointment"
-            >
-              <Calendar className="w-4 h-4" aria-hidden="true" />
-              <span className="sr-only">Book Doctor Appointment</span>
-            </button>
+            {/* Mobile & Tablet Navigation Controls (Visible below lg / 1024px) */}
+            <div className="flex lg:hidden items-center gap-2">
+              <button
+                onClick={() => onOpenBooking(null)}
+                className="bg-brand-700 hover:bg-brand-800 text-white p-2 rounded-lg text-xs font-bold flex items-center justify-center shadow-sm transition-colors sm:hidden"
+                title="Book Doctor Appointment"
+                aria-label="Book Doctor Appointment"
+              >
+                <Calendar className="w-4 h-4" aria-hidden="true" />
+                <span className="sr-only">Book Doctor Appointment</span>
+              </button>
 
-            <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
-              aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              title={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
-              aria-expanded={mobileMenuOpen}
-            >
-              {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
-              <span className="sr-only">{mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}</span>
-            </button>
+              <button
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
+                aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                title={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+                aria-expanded={mobileMenuOpen}
+              >
+                {mobileMenuOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
+                <span className="sr-only">{mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}</span>
+              </button>
+            </div>
+
           </div>
-
         </div>
-      </div>
 
       {/* Render Mobile Drawer directly into document.body to break out of containing blocks & guarantee 100% opaque full-viewport coverage */}
       {typeof document !== 'undefined' ? createPortal(mobileDrawer, document.body) : mobileDrawer}
