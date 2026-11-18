@@ -40,11 +40,11 @@ export default function ContactLocationSection() {
                 <MapPin className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-navy-900">Hospital Address</h4>
+                <h3 className="text-sm font-bold text-navy-900">Hospital Address</h3>
                 <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                   {HOSPITAL_INFO.address}
                 </p>
-                <span className="text-[11px] text-brand-600 font-semibold block mt-1">
+                <span className="text-[11px] text-brand-700 font-bold block mt-1">
                   Near Central City Interchange • 24/7 Car Parking
                 </span>
               </div>
@@ -56,7 +56,7 @@ export default function ContactLocationSection() {
                 <Phone className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-navy-900">Telephone & PABX Lines</h4>
+                <h3 className="text-sm font-bold text-navy-900">Telephone & PABX Lines</h3>
                 <p className="text-xs text-slate-600 mt-1">
                   General Inquiry: <strong className="text-navy-900">{HOSPITAL_INFO.telephone}</strong>
                 </p>
@@ -64,7 +64,7 @@ export default function ContactLocationSection() {
                   Doctor Serial Desk: <strong className="text-navy-900">10602</strong> (Ext: 101)
                 </p>
                 <p className="text-xs text-slate-600">
-                  Email Desk: <span className="text-brand-600 font-medium">{HOSPITAL_INFO.email}</span>
+                  Email Desk: <span className="text-brand-700 font-semibold">{HOSPITAL_INFO.email}</span>
                 </p>
               </div>
             </div>
@@ -75,7 +75,7 @@ export default function ContactLocationSection() {
                 <Clock className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-sm font-bold text-navy-900">Hospital Operating Hours</h4>
+                <h3 className="text-sm font-bold text-navy-900">Hospital Operating Hours</h3>
                 <p className="text-xs text-slate-600 mt-1">
                   <strong>OPD Specialist Clinics:</strong> {HOSPITAL_INFO.opdHours}
                 </p>
@@ -109,27 +109,27 @@ export default function ContactLocationSection() {
             <div className="my-6 grid grid-cols-2 sm:grid-cols-3 gap-3">
               <div className="p-3 bg-white rounded-xl shadow-xs border border-slate-200 text-xs">
                 <p className="font-bold text-navy-900">Building A</p>
-                <p className="text-[11px] text-slate-500">Emergency & Trauma</p>
+                <p className="text-[11px] text-slate-600 font-medium">Emergency & Trauma</p>
               </div>
               <div className="p-3 bg-white rounded-xl shadow-xs border border-slate-200 text-xs">
                 <p className="font-bold text-navy-900">Building B</p>
-                <p className="text-[11px] text-slate-500">Doctor OPD Chambers</p>
+                <p className="text-[11px] text-slate-600 font-medium">Doctor OPD Chambers</p>
               </div>
               <div className="p-3 bg-white rounded-xl shadow-xs border border-slate-200 text-xs">
                 <p className="font-bold text-navy-900">Building C</p>
-                <p className="text-[11px] text-slate-500">Diagnostics & Radiology</p>
+                <p className="text-[11px] text-slate-600 font-medium">Diagnostics & Radiology</p>
               </div>
               <div className="p-3 bg-white rounded-xl shadow-xs border border-slate-200 text-xs">
                 <p className="font-bold text-navy-900">Tower D</p>
-                <p className="text-[11px] text-slate-500">IPD Cabins & ICU</p>
+                <p className="text-[11px] text-slate-600 font-medium">IPD Cabins & ICU</p>
               </div>
               <div className="p-3 bg-white rounded-xl shadow-xs border border-slate-200 text-xs">
                 <p className="font-bold text-navy-900">Basement 1 & 2</p>
-                <p className="text-[11px] text-slate-500">Patient Parking Area</p>
+                <p className="text-[11px] text-slate-600 font-medium">Patient Parking Area</p>
               </div>
               <div className="p-3 bg-white rounded-xl shadow-xs border border-slate-200 text-xs">
                 <p className="font-bold text-navy-900">Pharmacy</p>
-                <p className="text-[11px] text-slate-500">24/7 Ground Floor</p>
+                <p className="text-[11px] text-slate-600 font-medium">24/7 Ground Floor</p>
               </div>
             </div>
 

@@ -45,7 +45,7 @@ export default function HealthPackagesSection({ onBookPackage }) {
               className={`px-4 py-1.5 rounded-full text-xs font-bold transition-all ${
                 selectedCategory === cat
                   ? "bg-brand-600 text-white shadow-md shadow-brand-600/25"
-                  : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
               }`}
             >
               {cat === "all" ? "All Health Packages" : cat}
@@ -77,53 +77,53 @@ export default function HealthPackagesSection({ onBookPackage }) {
                   <span className="bg-slate-100 px-2.5 py-0.5 rounded-full text-slate-700">
                     {pkg.category}
                   </span>
-                  <span className="flex items-center gap-1 text-slate-400">
-                    <Clock className="w-3 h-3" />
+                  <span className="flex items-center gap-1 text-slate-600 font-medium">
+                    <Clock className="w-3.5 h-3.5 text-slate-500" />
                     <span>{pkg.turnaround}</span>
                   </span>
                 </div>
 
                 {/* Title & Tagline */}
-                <h3 className="text-lg font-bold text-navy-900 group-hover:text-brand-600 transition-colors">
+                <h3 className="text-lg font-bold text-navy-900 group-hover:text-brand-700 transition-colors">
                   {pkg.title}
                 </h3>
-                <p className="text-xs text-slate-500 mt-1 mb-4 leading-snug">
+                <p className="text-xs text-slate-600 mt-1 mb-4 leading-snug">
                   {pkg.tagline}
                 </p>
 
                 {/* Price Display */}
                 <div className="p-3.5 bg-brand-50/60 rounded-2xl border border-brand-100/80 mb-5">
-                  <span className="text-[11px] text-slate-400 line-through block">
+                  <span className="text-[11px] text-slate-600 line-through block font-semibold">
                     Regular: ৳{pkg.originalPrice.toLocaleString()}
                   </span>
                   <div className="flex items-baseline gap-1.5">
                     <span className="text-2xl font-extrabold text-navy-900">
                       ৳{pkg.discountedPrice.toLocaleString()}
                     </span>
-                    <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-1.5 py-0.5 rounded">
+                    <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-1.5 py-0.5 rounded">
                       Save ৳{(pkg.originalPrice - pkg.discountedPrice).toLocaleString()}
                     </span>
                   </div>
-                  <span className="text-[10px] text-slate-500 mt-1 block font-medium">
+                  <span className="text-[10px] text-slate-600 mt-1 block font-semibold">
                     Includes {pkg.includedCount}
                   </span>
                 </div>
 
                 {/* Included Tests List */}
                 <div className="space-y-2 mb-6">
-                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                  <p className="text-[11px] font-bold uppercase tracking-wider text-slate-600">
                     Key Tests & Investigations:
                   </p>
                   <ul className="space-y-1.5">
                     {pkg.tests.slice(0, 5).map((test, idx) => (
-                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-600">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                      <li key={idx} className="flex items-start gap-2 text-xs text-slate-700 font-medium">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0 mt-0.5" />
                         <span className="line-clamp-1">{test}</span>
                       </li>
                     ))}
                   </ul>
                   {pkg.tests.length > 5 && (
-                    <p className="text-[11px] text-brand-600 font-semibold pt-1">
+                    <p className="text-[11px] text-brand-700 font-bold pt-1">
                       + {pkg.tests.length - 5} more diagnostic investigations
                     </p>
                   )}

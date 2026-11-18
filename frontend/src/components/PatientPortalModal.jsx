@@ -126,7 +126,8 @@ export default function PatientPortalModal({ onClose, onNotification }) {
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            aria-label="Close patient portal dialog"
+            className="p-1.5 rounded-full text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -205,11 +206,10 @@ export default function PatientPortalModal({ onClose, onNotification }) {
                     setIsLogin(true);
                     setError("");
                   }}
-                  className={`flex-1 pb-3 text-xs font-bold transition-all border-b-2 ${
-                    isLogin
-                      ? "border-brand-600 text-brand-600"
-                      : "border-transparent text-slate-400 hover:text-slate-600"
-                  }`}
+                  className={`flex-1 pb-3 text-xs font-bold transition-all border-b-2 ${isLogin
+                      ? "border-brand-600 text-brand-700"
+                      : "border-transparent text-slate-600 hover:text-slate-800"
+                    }`}
                 >
                   Sign In (Existing Patient)
                 </button>
@@ -218,11 +218,10 @@ export default function PatientPortalModal({ onClose, onNotification }) {
                     setIsLogin(false);
                     setError("");
                   }}
-                  className={`flex-1 pb-3 text-xs font-bold transition-all border-b-2 ${
-                    !isLogin
-                      ? "border-brand-600 text-brand-600"
-                      : "border-transparent text-slate-400 hover:text-slate-600"
-                  }`}
+                  className={`flex-1 pb-3 text-xs font-bold transition-all border-b-2 ${!isLogin
+                      ? "border-brand-600 text-brand-700"
+                      : "border-transparent text-slate-600 hover:text-slate-800"
+                    }`}
                 >
                   Register (New Patient)
                 </button>
@@ -239,33 +238,39 @@ export default function PatientPortalModal({ onClose, onNotification }) {
                 /* Login Form */
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                    <label htmlFor="portal-login-email" className="block text-xs font-bold text-slate-800 mb-1">
                       Registered Email Address
                     </label>
                     <div className="relative">
-                      <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                       <input
+                        id="portal-login-email"
+                        name="email"
+                        aria-label="Registered Email Address"
                         type="email"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">
+                    <label htmlFor="portal-login-password" className="block text-xs font-bold text-slate-800 mb-1">
                       Account Password
                     </label>
                     <div className="relative">
-                      <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                      <Lock className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                       <input
+                        id="portal-login-password"
+                        name="password"
+                        aria-label="Account Password"
                         type="password"
                         required
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                        className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                       />
                     </div>
                   </div>
@@ -282,58 +287,70 @@ export default function PatientPortalModal({ onClose, onNotification }) {
                     )}
                   </button>
 
-                  <div className="pt-2 text-center text-[11px] text-slate-400">
-                    Sample login: <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-600">patient.john@gmail.com</code> / <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-600">patient123</code>
+                  <div className="pt-2 text-center text-[11px] text-slate-600 font-medium">
+                    Sample login: <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700 font-semibold">patient.john@gmail.com</code> / <code className="bg-slate-100 px-1 py-0.5 rounded text-slate-700 font-semibold">patient123</code>
                   </div>
                 </form>
               ) : (
                 /* Registration Form */
                 <form onSubmit={handleRegister} className="space-y-3.5">
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Full Name</label>
+                    <label htmlFor="portal-reg-name" className="block text-xs font-bold text-slate-800 mb-1">Full Name</label>
                     <input
+                      id="portal-reg-name"
+                      name="fullName"
+                      aria-label="Full Name"
                       type="text"
                       required
                       placeholder="e.g. Tanvir Ahmed"
                       value={regFullName}
                       onChange={(e) => setRegFullName(e.target.value)}
-                      className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Email Address</label>
+                    <label htmlFor="portal-reg-email" className="block text-xs font-bold text-slate-800 mb-1">Email Address</label>
                     <input
+                      id="portal-reg-email"
+                      name="regEmail"
+                      aria-label="Email Address"
                       type="email"
                       required
                       placeholder="tanvir@gmail.com"
                       value={regEmail}
                       onChange={(e) => setRegEmail(e.target.value)}
-                      className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Mobile Phone</label>
+                    <label htmlFor="portal-reg-phone" className="block text-xs font-bold text-slate-800 mb-1">Mobile Phone</label>
                     <input
+                      id="portal-reg-phone"
+                      name="regPhone"
+                      aria-label="Mobile Phone"
                       type="tel"
                       required
                       placeholder="+880 1712 000000"
                       value={regPhone}
                       onChange={(e) => setRegPhone(e.target.value)}
-                      className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold text-slate-700 mb-1">Choose Password (min 6 chars)</label>
+                    <label htmlFor="portal-reg-password" className="block text-xs font-bold text-slate-800 mb-1">Choose Password (min 6 chars)</label>
                     <input
+                      id="portal-reg-password"
+                      name="regPassword"
+                      aria-label="Choose Password (minimum 6 characters)"
                       type="password"
                       required
                       minLength="6"
                       value={regPassword}
                       onChange={(e) => setRegPassword(e.target.value)}
-                      className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full px-3.5 py-2 text-xs bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                     />
                   </div>
 

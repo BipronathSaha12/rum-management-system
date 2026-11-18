@@ -55,7 +55,7 @@ export default function HospitalStats() {
                 <p className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white group-hover:text-brand-300 transition-colors">
                   {metric.value}
                 </p>
-                <p className="mt-1 text-[11px] sm:text-xs text-slate-400 font-medium leading-snug">
+                <p className="mt-1 text-[11px] sm:text-xs text-slate-300 font-medium leading-snug">
                   {metric.label}
                 </p>
               </div>

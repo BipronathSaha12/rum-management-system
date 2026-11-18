@@ -4,7 +4,7 @@ import { HOSPITAL_INFO } from '../data/hospitalData';
 
 export default function EmergencyTopBar() {
   return (
-    <div className="bg-navy-950 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
+    <aside aria-label="Emergency and 24/7 Hotline Information" className="bg-navy-950 text-slate-200 text-xs py-2 px-4 border-b border-slate-800">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
         {/* Left: Emergency & Ambulance Hotlines */}
         <div className="flex items-center flex-wrap justify-center sm:justify-start gap-4">
@@ -44,6 +44,6 @@ export default function EmergencyTopBar() {
           </div>
         </div>
       </div>
-    </div>
+    </aside>
   );
 }

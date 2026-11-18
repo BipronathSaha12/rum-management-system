@@ -116,7 +116,8 @@ export default function AppointmentBookingModal({
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            aria-label="Close appointment booking dialog"
+            className="p-1.5 rounded-full text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -153,42 +154,42 @@ export default function AppointmentBookingModal({
 
                 <div className="grid grid-cols-2 gap-3 text-slate-700">
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">Patient Name</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-bold block">Patient Name</span>
                     <span className="font-bold text-navy-900">{confirmedBooking.patientName}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">Serial No</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-bold block">Serial No</span>
                     <span className="font-mono font-bold text-navy-900">{confirmedBooking.serialNumber}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">Specialist</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-bold block">Specialist</span>
                     <span className="font-bold text-navy-900">{confirmedBooking.doctorName}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">Department</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-bold block">Department</span>
                     <span className="font-semibold text-slate-800">{confirmedBooking.department}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">Date & Time</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-bold block">Date & Time</span>
                     <span className="font-bold text-brand-700">
                       {confirmedBooking.appointmentDate} at {confirmedBooking.appointmentTime}
                     </span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">OPD Room</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-bold block">OPD Room</span>
                     <span className="font-semibold text-slate-800">{confirmedBooking.roomNumber}</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">Visiting Fee</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-bold block">Visiting Fee</span>
                     <span className="font-extrabold text-navy-900">৳{confirmedBooking.visitingFee} (Pay at Counter)</span>
                   </div>
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-bold block">Issued At</span>
-                    <span className="text-slate-500">{confirmedBooking.bookingTime}</span>
+                    <span className="text-[10px] text-slate-600 uppercase font-bold block">Issued At</span>
+                    <span className="text-slate-600 font-medium">{confirmedBooking.bookingTime}</span>
                   </div>
                 </div>
 
-                <div className="pt-2 text-[10px] text-slate-500 border-t border-slate-200 text-center">
+                <div className="pt-2 text-[10px] text-slate-600 font-medium border-t border-slate-200 text-center">
                   Please arrive 15 minutes prior to your allocated slot. For cancellation, call {HOSPITAL_INFO.hotline}.
                 </div>
               </div>
@@ -222,13 +223,17 @@ export default function AppointmentBookingModal({
 
               {/* Select Doctor */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label htmlFor="booking-doctor-select" className="block text-xs font-bold text-slate-800 mb-1">
                   Selected Specialist Consultant
                 </label>
                 <select
+                  id="booking-doctor-select"
+                  name="doctor"
+                  aria-label="Selected Specialist Consultant"
+                  title="Selected Specialist Consultant"
                   value={doctorId}
                   onChange={(e) => setDoctorId(Number(e.target.value))}
-                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium"
+                  className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium text-slate-800"
                 >
                   {DOCTORS.map((doc) => (
                     <option key={doc.id} value={doc.id}>
@@ -236,8 +241,8 @@ export default function AppointmentBookingModal({
                     </option>
                   ))}
                 </select>
-                <p className="text-[11px] text-slate-500 mt-1 flex items-center gap-1">
-                  <MapPin className="w-3 h-3 text-brand-600" />
+                <p className="text-[11px] text-slate-600 mt-1 flex items-center gap-1 font-medium">
+                  <MapPin className="w-3.5 h-3.5 text-brand-700" />
                   <span>{activeDoctor.room_number} • {activeDoctor.visiting_hours}</span>
                 </p>
               </div>
@@ -245,27 +250,34 @@ export default function AppointmentBookingModal({
               {/* Date & Slot Row */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="booking-date-input" className="block text-xs font-bold text-slate-800 mb-1">
                     Appointment Date
                   </label>
                   <input
+                    id="booking-date-input"
+                    name="appointmentDate"
+                    aria-label="Appointment Date"
                     type="date"
                     min={todayStr}
                     value={appointmentDate}
                     onChange={(e) => setAppointmentDate(e.target.value)}
                     required
-                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium"
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium text-slate-800"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="booking-slot-select" className="block text-xs font-bold text-slate-800 mb-1">
                     Select Time Slot
                   </label>
                   <select
+                    id="booking-slot-select"
+                    name="timeSlot"
+                    aria-label="Select Time Slot"
+                    title="Select Time Slot"
                     value={selectedSlot}
                     onChange={(e) => setSelectedSlot(e.target.value)}
-                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium"
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 font-medium text-slate-800"
                   >
                     {TIME_SLOTS.map((slot) => (
                       <option key={slot} value={slot}>
@@ -278,18 +290,21 @@ export default function AppointmentBookingModal({
 
               {/* Patient Full Name */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label htmlFor="booking-patient-name" className="block text-xs font-bold text-slate-800 mb-1">
                   Patient Full Name *
                 </label>
                 <div className="relative">
-                  <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <User className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                   <input
+                    id="booking-patient-name"
+                    name="patientName"
+                    aria-label="Patient Full Name"
                     type="text"
                     required
                     placeholder="e.g. Mohammad Rahim"
                     value={patientName}
                     onChange={(e) => setPatientName(e.target.value)}
-                    className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                   />
                 </div>
               </div>
@@ -297,30 +312,37 @@ export default function AppointmentBookingModal({
               {/* Mobile Phone & Gender */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="booking-patient-phone" className="block text-xs font-bold text-slate-800 mb-1">
                     Mobile Number (For SMS Confirmation) *
                   </label>
                   <div className="relative">
-                    <Phone className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                    <Phone className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                     <input
+                      id="booking-patient-phone"
+                      name="phoneNumber"
+                      aria-label="Mobile Number for SMS Confirmation"
                       type="tel"
                       required
                       placeholder="+880 1712 345678"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                      className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="booking-patient-gender" className="block text-xs font-bold text-slate-800 mb-1">
                     Gender
                   </label>
                   <select
+                    id="booking-patient-gender"
+                    name="gender"
+                    aria-label="Patient Gender"
+                    title="Patient Gender"
                     value={gender}
                     onChange={(e) => setGender(e.target.value)}
-                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                   >
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -331,31 +353,37 @@ export default function AppointmentBookingModal({
 
               {/* Optional Email & Symptoms */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label htmlFor="booking-patient-email" className="block text-xs font-bold text-slate-800 mb-1">
                   Email Address (Optional)
                 </label>
                 <div className="relative">
-                  <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                  <Mail className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500" />
                   <input
+                    id="booking-patient-email"
+                    name="email"
+                    aria-label="Patient Email Address (Optional)"
                     type="email"
                     placeholder="patient@gmail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500"
+                    className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 text-slate-800"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-slate-700 mb-1">
+                <label htmlFor="booking-patient-symptoms" className="block text-xs font-bold text-slate-800 mb-1">
                   Reason for Consultation / Symptoms (Optional)
                 </label>
                 <textarea
+                  id="booking-patient-symptoms"
+                  name="symptoms"
+                  aria-label="Reason for Consultation or Symptoms (Optional)"
                   rows="2"
                   placeholder="Briefly describe chest pain, migraine, follow-up, etc."
                   value={symptoms}
                   onChange={(e) => setSymptoms(e.target.value)}
-                  className="w-full px-3.5 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none"
+                  className="w-full px-3.5 py-2 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 resize-none text-slate-800"
                 />
               </div>
 

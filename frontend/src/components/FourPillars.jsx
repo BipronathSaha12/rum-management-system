@@ -15,7 +15,7 @@ export default function FourPillars({ onSelectTab }) {
       title: "Find a Doctor",
       subtitle: "Browse 120+ clinical consultants across 35 medical specialties.",
       icon: UserSearch,
-      iconBg: "bg-blue-100 text-brand-700",
+      iconBg: "bg-blue-100 text-brand-800",
       borderHover: "hover:border-brand-500",
       cta: "Browse Directory",
       href: "#doctors",
@@ -25,7 +25,7 @@ export default function FourPillars({ onSelectTab }) {
       title: "Online Diagnostic Reports",
       subtitle: "Download verified pathology & radiology reports securely with HCN.",
       icon: FileText,
-      iconBg: "bg-emerald-100 text-emerald-700",
+      iconBg: "bg-emerald-100 text-emerald-800",
       borderHover: "hover:border-emerald-500",
       cta: "Get My Report",
       href: "#reports",
@@ -35,7 +35,7 @@ export default function FourPillars({ onSelectTab }) {
       title: "Health Check-up Packages",
       subtitle: "Preventive comprehensive wellness screening for you & your family.",
       icon: PackagePlus,
-      iconBg: "bg-amber-100 text-amber-700",
+      iconBg: "bg-amber-100 text-amber-800",
       borderHover: "hover:border-amber-500",
       cta: "View Packages",
       href: "#packages",
@@ -45,7 +45,7 @@ export default function FourPillars({ onSelectTab }) {
       title: "24/7 Emergency & Trauma",
       subtitle: `Immediate critical care, CCU, NICU & rapid ambulance: ${HOSPITAL_INFO.hotline}`,
       icon: Ambulance,
-      iconBg: "bg-red-100 text-clinical-emergency",
+      iconBg: "bg-red-100 text-red-700",
       borderHover: "hover:border-red-500",
       cta: "Emergency Info",
       href: "#emergency",
@@ -54,7 +54,8 @@ export default function FourPillars({ onSelectTab }) {
   ];
 
   return (
-    <section className="relative -mt-6 sm:-mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
+    <section aria-labelledby="rapid-services-title" className="relative -mt-6 sm:-mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
+      <h2 id="rapid-services-title" className="sr-only">Rapid Clinical Services & Emergency Access</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {pillars.map((item) => {
           const Icon = item.icon;
@@ -71,12 +72,12 @@ export default function FourPillars({ onSelectTab }) {
                 <h3 className="text-base font-bold text-navy-900 group-hover:text-brand-700 transition-colors">
                   {item.title}
                 </h3>
-                <p className="mt-1.5 text-xs text-slate-500 leading-relaxed font-normal">
+                <p className="mt-1.5 text-xs text-slate-600 leading-relaxed font-medium">
                   {item.subtitle}
                 </p>
               </div>
 
-              <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-600 group-hover:text-brand-700">
+              <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-brand-700 group-hover:text-brand-800">
                 <span>{item.cta}</span>
                 <ArrowRight className="w-4 h-4 transform group-hover:translate-x-1 transition-transform" />
               </div>

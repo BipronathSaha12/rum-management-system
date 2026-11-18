@@ -51,18 +51,18 @@ export default function App() {
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-800 font-sans selection:bg-brand-100 selection:text-brand-900 pb-16 sm:pb-0">
-      
-      {/* 1. Top 24/7 Emergency & Ambulance Bar */}
-      <EmergencyTopBar />
 
-      {/* 2. Main Sticky Navigation with Mobile Drawer */}
-      <Navbar
-        onOpenPortal={() => setIsPortalModalOpen(true)}
-        onOpenBooking={() => handleOpenBooking(null)}
-      />
+      {/* 1 & 2. Institutional Header Landmark enclosing Emergency Bar & Navigation */}
+      <header role="banner" className="relative z-40">
+        <EmergencyTopBar />
+        <Navbar
+          onOpenPortal={() => setIsPortalModalOpen(true)}
+          onOpenBooking={() => handleOpenBooking(null)}
+        />
+      </header>
 
       {/* Main Content Sections */}
-      <main className="flex-1">
+      <main id="main-content" className="flex-1">
         {/* 3. Hero Banner with Clinical Value Proposition */}
         <HeroSection
           onOpenBooking={handleOpenBooking}

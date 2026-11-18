@@ -69,15 +69,15 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
             <div className="pt-6 grid grid-cols-3 gap-3 border-t border-slate-200/80 text-left">
               <div>
                 <p className="text-xl sm:text-2xl font-extrabold text-navy-900">120+</p>
-                <p className="text-xs text-slate-500 font-medium">Renowned Doctors</p>
+                <p className="text-xs text-slate-600 font-semibold">Renowned Doctors</p>
               </div>
               <div>
                 <p className="text-xl sm:text-2xl font-extrabold text-navy-900">24/7</p>
-                <p className="text-xs text-slate-500 font-medium">ICU & Emergency</p>
+                <p className="text-xs text-slate-600 font-semibold">ICU & Emergency</p>
               </div>
               <div>
                 <p className="text-xl sm:text-2xl font-extrabold text-navy-900">99.4%</p>
-                <p className="text-xs text-slate-500 font-medium">Patient Satisfaction</p>
+                <p className="text-xs text-slate-600 font-semibold">Patient Satisfaction</p>
               </div>
             </div>
 
@@ -110,12 +110,12 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
                 {/* Floating Quick Feature Strip */}
                 <div className="mt-3 p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">
+                    <div className="w-8 h-8 rounded-lg bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold">
                       <Activity className="w-4 h-4" />
                     </div>
                     <div>
                       <p className="font-bold text-slate-800">Available Today</p>
-                      <p className="text-[11px] text-slate-500">OPD Room 304 (5 PM - 9 PM)</p>
+                      <p className="text-[11px] text-slate-600 font-medium">OPD Room 304 (5 PM - 9 PM)</p>
                     </div>
                   </div>
                   <button
@@ -133,7 +133,7 @@ export default function HeroSection({ onOpenBooking, onSearchClick }) {
                   🚨
                 </div>
                 <div>
-                  <p className="text-[11px] font-bold text-slate-500 uppercase">Emergency Desk</p>
+                  <p className="text-[11px] font-bold text-slate-600 uppercase">Emergency Desk</p>
                   <p className="text-sm font-extrabold text-navy-900">Hotline 10602</p>
                 </div>
               </div>

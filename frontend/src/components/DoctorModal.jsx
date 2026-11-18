@@ -31,7 +31,8 @@ export default function DoctorModal({ doctor, onClose, onBookAppointment }) {
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-full text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
+            aria-label="Close doctor profile dialog"
+            className="p-1.5 rounded-full text-slate-500 hover:text-slate-700 hover:bg-slate-100 transition-colors"
           >
             <X className="w-5 h-5" />
           </button>
@@ -48,17 +49,17 @@ export default function DoctorModal({ doctor, onClose, onBookAppointment }) {
               className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl object-cover object-top border-4 border-brand-50 shadow-md shrink-0"
             />
             <div className="space-y-1">
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-500 bg-amber-50 px-2.5 py-0.5 rounded-full">
-                <Star className="w-3.5 h-3.5 fill-amber-400 stroke-amber-400" />
-                <span>{doctor.rating}</span>
-                <span className="text-slate-500 font-normal">({doctor.reviewsCount} Patient Reviews)</span>
+              <div className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-800 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200">
+                <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
+                <span className="text-amber-900 font-extrabold">{doctor.rating}</span>
+                <span className="text-slate-600 font-medium">({doctor.reviewsCount} Patient Reviews)</span>
               </div>
 
               <h2 className="text-xl sm:text-2xl font-extrabold text-navy-900">
                 {doctor.name}
               </h2>
               
-              <p className="text-sm font-semibold text-brand-600">
+              <p className="text-sm font-semibold text-brand-700">
                 {doctor.designation}
               </p>
 
@@ -67,7 +68,7 @@ export default function DoctorModal({ doctor, onClose, onBookAppointment }) {
               </p>
 
               <div className="pt-1 flex items-center justify-center sm:justify-start gap-2">
-                <span className="text-xs font-semibold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
+                <span className="text-xs font-semibold text-emerald-800 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-100">
                   {doctor.experience}
                 </span>
                 <span className="text-xs font-semibold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-full">
@@ -79,10 +80,10 @@ export default function DoctorModal({ doctor, onClose, onBookAppointment }) {
 
           {/* Biography */}
           <div className="space-y-2">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-              <BookOpen className="w-3.5 h-3.5" />
+            <h3 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+              <BookOpen className="w-3.5 h-3.5 text-brand-700" />
               <span>Professional Summary</span>
-            </h4>
+            </h3>
             <p className="text-xs sm:text-sm text-slate-600 leading-relaxed bg-slate-50 p-4 rounded-2xl border border-slate-100">
               {doctor.bio}
             </p>
@@ -119,8 +120,8 @@ export default function DoctorModal({ doctor, onClose, onBookAppointment }) {
                 ৳{doctor.visiting_fee.toLocaleString()}
               </p>
             </div>
-            <div className="text-right text-[11px] text-slate-500">
-              <p className="font-semibold text-emerald-600">✓ No Advance Payment Required</p>
+            <div className="text-right text-[11px] text-slate-600 font-medium">
+              <p className="font-bold text-emerald-800">✓ No Advance Payment Required</p>
               <p>Pay at hospital cash counter</p>
             </div>
           </div>

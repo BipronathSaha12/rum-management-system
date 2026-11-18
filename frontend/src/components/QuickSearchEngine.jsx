@@ -22,14 +22,14 @@ export default function QuickSearchEngine({
           </div>
           <div>
             <h3 className="text-sm font-bold text-navy-900">Search Doctor Directory</h3>
-            <p className="text-xs text-slate-500">Filter by consultant name, department, or availability</p>
+            <p className="text-xs text-slate-600">Filter by consultant name, department, or availability</p>
           </div>
         </div>
 
         {(searchQuery || selectedDepartment !== "all" || selectedDay !== "all") && (
           <button
             onClick={onReset}
-            className="flex items-center gap-1 text-xs font-semibold text-slate-500 hover:text-red-600 transition-colors"
+            className="flex items-center gap-1 text-xs font-bold text-slate-600 hover:text-red-700 transition-colors"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Filters</span>
@@ -40,30 +40,37 @@ export default function QuickSearchEngine({
       <div className="grid grid-cols-1 md:grid-cols-12 gap-3 sm:gap-4">
         {/* Search by Name / Keyword */}
         <div className="md:col-span-5 relative">
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+          <label htmlFor="quick-doctor-search" className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
             Doctor Name or Keyword
           </label>
           <div className="relative">
             <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
             <input
+              id="quick-doctor-search"
+              name="doctorSearch"
+              aria-label="Search Doctor by Name or Keyword"
               type="text"
               placeholder="e.g. Dr. Rahman, Cardiology, MRCP..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+              className="w-full pl-9 pr-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all text-slate-800"
             />
           </div>
         </div>
 
         {/* Select Department */}
         <div className="md:col-span-4">
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+          <label htmlFor="quick-dept-select" className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
             Clinical Department
           </label>
           <select
+            id="quick-dept-select"
+            name="department"
+            aria-label="Filter by Clinical Department"
+            title="Filter by Clinical Department"
             value={selectedDepartment}
             onChange={(e) => setSelectedDepartment(e.target.value)}
-            className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+            className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all text-slate-800"
           >
             <option value="all">All Departments & Centers</option>
             {DEPARTMENTS.map((dept) => (
@@ -76,13 +83,17 @@ export default function QuickSearchEngine({
 
         {/* Select Visiting Day */}
         <div className="md:col-span-3">
-          <label className="block text-[11px] font-bold uppercase tracking-wider text-slate-500 mb-1">
+          <label htmlFor="quick-day-select" className="block text-[11px] font-bold uppercase tracking-wider text-slate-700 mb-1">
             Visiting Day
           </label>
           <select
+            id="quick-day-select"
+            name="visitingDay"
+            aria-label="Filter by Visiting Day"
+            title="Filter by Visiting Day"
             value={selectedDay}
             onChange={(e) => setSelectedDay(e.target.value)}
-            className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all"
+            className="w-full px-3.5 py-2.5 text-xs sm:text-sm bg-slate-50 border border-slate-200 rounded-xl focus:bg-white focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 transition-all text-slate-800"
           >
             {days.map((day) => (
               <option key={day} value={day === "All Days" ? "all" : day}>

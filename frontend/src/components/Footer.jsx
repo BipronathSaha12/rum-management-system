@@ -39,6 +39,7 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
 
       {/* Main Footer Links */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <h2 className="sr-only">Hospital Directory and Services</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12">
           
           {/* Brand Bio */}
@@ -50,13 +51,13 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
               <div>
                 <span className="text-xl font-extrabold text-white tracking-tight">RUM</span>
                 <span className="text-xl font-bold text-brand-400 tracking-tight ml-1">HOSPITAL</span>
-                <p className="text-[10px] text-slate-400 font-semibold tracking-wider uppercase">
+                <p className="text-[10px] text-slate-300 font-semibold tracking-wider uppercase">
                   Tertiary Healthcare Center
                 </p>
               </div>
             </div>
 
-            <p className="text-slate-400 text-xs leading-relaxed font-normal">
+            <p className="text-slate-300 text-xs leading-relaxed font-normal">
               RUM Hospital is a multi-disciplinary tertiary care corporate hospital dedicated to providing international standard clinical treatments, modern diagnostics, and compassionate patient healing in Bangladesh.
             </p>
 
@@ -68,10 +69,10 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
 
           {/* Clinical Departments Column */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider">
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider">
               Centers of Excellence
-            </h4>
-            <ul className="space-y-2 text-slate-400">
+            </h3>
+            <ul className="space-y-2 text-slate-300">
               {DEPARTMENTS.slice(0, 6).map((dept) => (
                 <li key={dept.id}>
                   <a href="#doctors" className="hover:text-white transition-colors">
@@ -84,10 +85,10 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
 
           {/* Quick Patient Links */}
           <div className="lg:col-span-2 space-y-3">
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider">
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider">
               Patient Services
-            </h4>
-            <ul className="space-y-2 text-slate-400">
+            </h3>
+            <ul className="space-y-2 text-slate-300">
               <li>
                 <a href="#doctors" className="hover:text-white transition-colors">
                   Find a Doctor
@@ -123,10 +124,10 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
 
           {/* Contact & Address */}
           <div className="lg:col-span-3 space-y-3">
-            <h4 className="text-white text-xs font-bold uppercase tracking-wider">
+            <h3 className="text-white text-xs font-bold uppercase tracking-wider">
               Hospital Contact Info
-            </h4>
-            <div className="space-y-2.5 text-slate-400">
+            </h3>
+            <div className="space-y-2.5 text-slate-300">
               <p className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-brand-400 shrink-0 mt-0.5" />
                 <span>{HOSPITAL_INFO.address}</span>
@@ -154,7 +155,7 @@ export default function Footer({ onOpenBooking, onOpenPortal }) {
         </div>
 
         {/* Bottom Copyright */}
-        <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-500 text-[11px]">
+        <div className="mt-12 pt-6 border-t border-slate-800/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-slate-300 font-medium text-[11px]">
           <p>© 2026 RUM Hospital. All Rights Reserved. Built for high-volume hospital operations.</p>
           <p className="flex items-center gap-1">
             <span>Clinical Healthcare Architecture</span>

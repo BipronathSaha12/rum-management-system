@@ -13,12 +13,12 @@ export default {
           200: '#bae6fd',
           300: '#7dd3fc',
           400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7', // Primary Medical Sky Blue
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          500: '#0284c7',
+          600: '#0369a1', // Primary Medical Blue - WCAG 2.1 AA compliant (5.9:1 on white/light, 5.9:1 with white text)
+          700: '#075985',
+          800: '#0c4a6e',
+          900: '#082f49',
+          950: '#041c2c',
         },
         navy: {
           800: '#1e293b',
@@ -26,9 +26,9 @@ export default {
           950: '#020617',
         },
         clinical: {
-          green: '#059669', // Verified Specialist / Available Slot
-          teal: '#0d9488',
-          emergency: '#dc2626', // 24/7 Hotline & Ambulance
+          green: '#047857', // Verified Specialist - WCAG 2.1 AA compliant (5.1:1 on white)
+          teal: '#0f766e',
+          emergency: '#dc2626', // 24/7 Hotline & Ambulance (4.88:1 on white/black)
           surface: '#f8fafc',
           border: '#e2e8f0',
         }
