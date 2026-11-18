@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import rumLogo from '../public/RUM_logo.png';
+import rumLogo from '../public/logo.png';
 import {
   X,
   Calendar,
