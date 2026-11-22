@@ -48,4 +48,10 @@ pnpm-debug.log*
 *~
 .DS_Store
 Thumbs.db
+
+# --- Postman Local Workspace ---
+.postman/
+postman/
+backend/.postman/
+backend/postman/
 Desktop.ini
